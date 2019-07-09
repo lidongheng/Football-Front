@@ -1,0 +1,25 @@
+{
+  "name": "football-front",
+  "version": "1.0.0",
+  "description": "restful api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lidongheng/Football-Front.git"
+  },
+  "keywords": [
+    "Football"
+  ],
+  "author": "lidongheng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lidongheng/Football-Front/issues"
+  },
+  "homepage": "https://github.com/lidongheng/Football-Front#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
