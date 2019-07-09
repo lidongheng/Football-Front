@@ -1,28 +1,26 @@
 <template>
   <div id="app">
+    <app-nav></app-nav>
     <img src="./assets/logo.png">
     <HelloWorld/>
+    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld'
-
+import Nav from './components/Nav/Nav'
+import Footer from './components/Footer/Footer'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    'app-nav': Nav,
+    'app-footer': Footer
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
