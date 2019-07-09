@@ -27,11 +27,19 @@
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
         </li>
+        <li class="nav-item">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <div class="register">
+        <router-link to="/register" class="nav-link">注册</router-link>
+      </div>
+      <div class="login">
+        <router-link tag="a" to="/login" class="nav-link">登录</router-link>
+      </div>
     </div>
   </nav>
 </template>
@@ -41,5 +49,10 @@
 </script>
 
 <style scoped>
-
+.register a{
+  color: #ffffff;
+}
+.login a{
+  color: #ffffff;
+}
 </style>

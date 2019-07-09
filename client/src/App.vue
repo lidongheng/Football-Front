@@ -1,20 +1,19 @@
 <template>
   <div id="app">
     <app-nav></app-nav>
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <router-view></router-view>
     <app-footer></app-footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import Main from './components/Main/Main'
 import Nav from './components/Nav/Nav'
 import Footer from './components/Footer/Footer'
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Main,
     'app-nav': Nav,
     'app-footer': Footer
   }
