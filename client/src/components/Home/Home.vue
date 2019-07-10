@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <div class="container">
       <div class="row">
         <div class="col-md-3">濒临下课主帅名单</div>
         <div class="col-md-6 ml-auto">
@@ -274,7 +273,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 

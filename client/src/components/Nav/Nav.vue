@@ -17,6 +17,9 @@
           <router-link tag="a" class="nav-link" to="/newsItem">临时</router-link>
         </li>
         <li class="nav-item">
+          <router-link tag="a" class="nav-link" to="/premierLeague">英超</router-link>
+        </li>
+        <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
         </li>
         <li class="nav-item">

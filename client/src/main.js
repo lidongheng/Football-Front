@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
-import LightTimeLine from 'vue-light-timeline'
 import { routes } from './routes'
 
 Vue.config.productionTip = false

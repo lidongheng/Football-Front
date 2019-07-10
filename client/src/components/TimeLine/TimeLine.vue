@@ -1,13 +1,10 @@
 <template>
   <div class="timeline">
-    <div class="container">
       <div class="row">
         <div class="col-md-12 ml-auto mt-5">
           <light-timeline :items='items'></light-timeline>
         </div>
       </div>
-    </div>
-
   </div>
 
 </template>
