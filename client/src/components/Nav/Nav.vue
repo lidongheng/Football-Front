@@ -8,10 +8,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <router-link tag="a" class="nav-link" to="/">Home <span class="sr-only">(current)</span></router-link>
+          <router-link tag="a" class="nav-link" to="/">首页 <span class="sr-only">(current)</span></router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <router-link tag="a" class="nav-link" to="/timeline">时间线</router-link>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
