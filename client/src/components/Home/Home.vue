@@ -2,7 +2,18 @@
   <div class="home">
     <div class="container">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-3">濒临下课主帅名单</div>
+        <div class="col-md-6 ml-auto">
+          <h1 class="display-4">重要新闻</h1>
+          <NewsItem newsTitle="英超19-20赛季大阅兵之——阿森纳"/>
+          <NewsItem newsTitle="热刺战术分析——阿里和埃里克森在队伍中的作用"/>
+          <NewsItem newsTitle="赛季前瞻——狼队的综合实力配得上他的野心吗？"/>
+          <NewsItem newsTitle="新赛季的输盘王，是阿森纳曼联，还是曼城利物浦？"/>
+        </div>
+        <div class="col-md-3">稳胆投注比赛列表</div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <h1 class="display-4 text-center">近期焦点赛事</h1>
           <table class="table">
             <thead class="thead-dark">
@@ -35,12 +46,9 @@
             </tbody>
           </table>
         </div>
-        <div class="col-md-4">
-          <h1 class="display-4 text-center">其他板块</h1>
-        </div>
       </div>
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <h1 class="display-4 text-center">英超六强近期赛程</h1>
           <div class="match_wrapper">
             <div class="match_title">
@@ -271,7 +279,12 @@
 </template>
 
 <script>
-
+import NewsItem from '../../common/NewsItem'
+export default {
+  components: {
+    NewsItem
+  }
+}
 </script>
 
 <style scoped>
