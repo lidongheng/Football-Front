@@ -20,6 +20,9 @@
           <router-link tag="a" class="nav-link" to="/premierLeague">英超</router-link>
         </li>
         <li class="nav-item">
+          <router-link tag="a" class="nav-link" to="/ChineseSuperLeague">中超</router-link>
+        </li>
+        <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/news">新闻</router-link>
         </li>
         <li class="nav-item">
