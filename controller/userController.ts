@@ -8,41 +8,28 @@ const UserModel = mongoose.model("users", UserSchema);
 
 class UserController {
 
-    public register(req: Request, res: Response) {
+    public async register(req: Request, res: Response) {
         //查询数据库是否拥有邮箱
-        UserModel.findOne({email: req.body.email})
-            .then((user) => {
-                if (user) {
-                    res.status(400).json({email: "邮箱已被注册"});
-                } else {
-                    // 这里传个加密算法函数
-                    const saltRounds = 10;
-                    bcrypt.hash(req.body.password, saltRounds)
-                        .then(hash => {
-                            req.body.password = hash;
-                            const newUser: NewUser = {
-                                name: req.body.name,
-                                email: req.body.email,
-                                password: req.body.password
-                            };
-                            // @ts-ignore
-                            const newUserModel = new UserModel(newUser);
-                            newUserModel.save((user: any, err: any) => {
-                                if (err) {
-                                    res.send(err);
-                                } else {
-                                    res.json(user)
-                                }
-                            });
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        });
-                }
-            })
-    }
-    private jiami (password: string) {
-
+        const user = await UserModel.findOne({email: req.body.email});
+        if (user) {
+            res.status(400).json({email: "邮箱已被注册"});
+        }
+        const saltRounds = 10;
+        req.body.password = await bcrypt.hash(req.body.password, saltRounds);
+        const newUser: NewUser = {
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+        };
+        // @ts-ignore
+        const newUserModel = new UserModel(newUser);
+        newUserModel.save((err: any, user: any) => {
+            if (err) {
+               res.send(err);
+            } else {
+               res.json(user)
+            }
+        });
     }
     public login(req: Request, res: Response) {
         const email = req.body.email;
