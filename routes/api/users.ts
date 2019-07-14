@@ -16,7 +16,10 @@ usersRouter.get('/test', (req, res) => {
 // @desc 返回的请求的json数据
 // @access public
 usersRouter.post('/register', (req, res) => {
-    user.register(req,res);
+    user.register(req,res)
+        .catch(err => {
+            console.log(err);
+        });
 });
 
 // $route POST api/users/register
