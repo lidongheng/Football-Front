@@ -26,6 +26,9 @@ usersRouter.post('/register', (req, res) => {
 // @desc 返回token jwt passport
 // @access public
 usersRouter.post('/login', (req, res) => {
-    user.login(req, res);
+    user.login(req, res)
+        .catch(err => {
+            console.log(err);
+        })
 });
 

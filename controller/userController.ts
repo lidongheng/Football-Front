@@ -31,26 +31,21 @@ class UserController {
             }
         });
     }
-    public login(req: Request, res: Response) {
+    public async login(req: Request, res: Response) {
         const email = req.body.email;
         const password = req.body.password;
-        UserModel.findOne({email})
-            .then(user => {
-                if(!user) {
-                    res.status(404).json({"message": "用户不存在"});
-                }
-
-                // 密码匹配
-                // @ts-ignore
-                bcrypt.compare(password, user.password)
-                    .then(isMatch => {
-                        if (isMatch) {
-                            res.json({"message": "登录成功！"});
-                        } else {
-                            res.status(400).json({"message": "密码错误"});
-                        }
-                    })
-            })
+        const user = await UserModel.findOne({email})
+        if(!user) {
+            res.status(404).json({"message": "用户不存在"});
+        }
+        // 密码匹配
+        // @ts-ignore
+        const match = await bcrypt.compare(password, user.password)
+        if(match) {
+            res.json({"message": "登录成功！"});
+        } else {
+            res.status(400).json({"message": "密码错误"});
+        }
     }
 }
 
