@@ -10,6 +10,7 @@ import { Validator } from '../validation/validator';
 class UserController {
 
     public async register(req: Request, res: Response) {
+        console.log(req.body);
         const {errors, isValid } = Validator.registerInput(req.body);
         if(!isValid){
             return res.status(400).json(errors);
@@ -23,7 +24,7 @@ class UserController {
         const saltRounds = 10;
         req.body.password = await bcrypt.hash(req.body.password, saltRounds);
         const newUser: NewUser = {
-            name: req.body.name,
+            username: req.body.username,
             email: req.body.email,
             password: req.body.password
         };
@@ -31,9 +32,9 @@ class UserController {
         const newUserModel = new UserModel(newUser);
         newUserModel.save((err: any, user: any) => {
             if (err) {
-               res.send(err);
+                res.status(400).json({error:err});
             } else {
-               res.json(user)
+               res.status(200).json({success:true});
             }
         });
     }

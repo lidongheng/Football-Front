@@ -3,17 +3,17 @@ import validator from 'validator';
 export class Validator {
 
     public static registerInput(data: any){
-        data.name = !this.isEmpty(data.name) ? data.name : '';
+        data.username = !this.isEmpty(data.username) ? data.username : '';
         data.email = !this.isEmpty(data.email) ? data.email : '';
         data.password = !this.isEmpty(data.password) ? data.password : '';
         data.password2 = !this.isEmpty(data.password2) ? data.password2 : '';
-        let errors = {name:"",email:"",password:"",password2:""};
-        if(!validator.isLength(data.name,{min:2,max:30})) {
-            errors.name =  '名字的长度不能小于2位并且不能大于30位!'
+        let errors = {username:"",email:"",password:"",password2:""};
+        if(!validator.isLength(data.username,{min:2,max:30})) {
+            errors.username =  '名字的长度不能小于2位并且不能大于30位!'
         }
 
-        if (validator.isEmpty(data.name)) {
-           errors.name = '名字不能为空!'
+        if (validator.isEmpty(data.username)) {
+           errors.username = '名字不能为空!'
         }
 
         if (validator.isEmpty(data.email)) {
