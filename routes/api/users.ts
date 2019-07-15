@@ -1,6 +1,8 @@
 //login && register
 import { Router } from 'express';
 import UserController from '../../controller/userController';
+import passport from 'passport';
+
 
 export const usersRouter = Router();
 const user = new UserController();
@@ -32,3 +34,9 @@ usersRouter.post('/login', (req, res) => {
         })
 });
 
+// $route GET api/users/current
+// @desc return current user
+// @access private
+usersRouter.get('/current', passport.authenticate("jwt",{session:false}),(req, res) => {
+    res.json(req.user);
+});

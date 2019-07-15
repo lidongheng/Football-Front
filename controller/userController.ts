@@ -1,10 +1,10 @@
-import * as mongoose from 'mongoose';
 import {Request, Response} from 'express';
-import {UserSchema} from "../models/Users";
 import {NewUser} from "../interface/newUser";
 import bcrypt from "bcrypt";
+import * as jwt from 'jsonwebtoken';
+import SecretOrKey from '../config/secret';
+import { UserModel } from '../models/Users';
 
-const UserModel = mongoose.model("users", UserSchema);
 
 class UserController {
 
@@ -42,7 +42,10 @@ class UserController {
         // @ts-ignore
         const match = await bcrypt.compare(password, user.password)
         if(match) {
-            res.json({"message": "登录成功！"});
+            // @ts-ignore
+            const rule = {id:user.id,email:user.email};
+            const token = await jwt.sign(rule,SecretOrKey,{expiresIn:3600});
+            res.json({success:true,token:"Bearer " + token});
         } else {
             res.status(400).json({"message": "密码错误"});
         }

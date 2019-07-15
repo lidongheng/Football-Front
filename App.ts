@@ -2,8 +2,10 @@ import express from 'express';
 import bodyParser from "body-parser";
 import {usersRouter} from "./routes/api/users";
 import mongoose from 'mongoose';
-import db from './config/keys';
+import db from './config/db';
 import path from "path";
+import passport from 'passport';
+import { PassportConfig } from './config/passport';
 
 class App {
     public app: express.Application;
@@ -31,6 +33,9 @@ class App {
     private middleware(): void {
         this.app.use(bodyParser.urlencoded({extended: false}));
         this.app.use(bodyParser.json());
+        this.app.use(passport.initialize());
+        const pConfig = new PassportConfig(passport);
+        pConfig.init();
         this.app.use("/static", express.static(path.resolve("./","./public","img")));
         this.app.use((req, res, next) => {
             res.header('Access-Control-Allow-Origin', '*');
