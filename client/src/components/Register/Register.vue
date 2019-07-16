@@ -6,10 +6,22 @@
           <h1 class="display-4 text-center">注册</h1>
           <p class="lead text-center">创建新的账户</p>
           <form @submit.prevent="onSubmit">
-            <InputGroup inputType="text" textName="username" placeholder="用户名" v-model="username"/>
-            <InputGroup inputType="email" textName="email" placeholder="邮箱" v-model="email"/>
-            <InputGroup inputType="password" textName="password" placeholder="密码" v-model="password"/>
-            <InputGroup inputType="password" textName="password2" placeholder="确认密码" v-model="password2"/>
+            <div class="form-group">
+              <InputGroup inputType="text" textName="username" placeholder="用户名" :error="errors.username" v-model="username"/>
+              <div class="invalid-feedback d-block">{{errors.username}}</div>
+            </div>
+            <div class="form-group">
+              <InputGroup inputType="email" textName="email" placeholder="邮箱" :error="errors.email" v-model="email"/>
+              <div class="invalid-feedback d-block">{{errors.email}}</div>
+            </div>
+            <div class="form-group">
+              <InputGroup inputType="password" textName="password" placeholder="密码" :error="errors.password" v-model="password"/>
+              <div class="invalid-feedback d-block">{{errors.password}}</div>
+            </div>
+            <div class="form-group">
+              <InputGroup inputType="password" textName="password2" placeholder="确认密码" :error="errors.password2" v-model="password2"/>
+              <div class="invalid-feedback d-block">{{errors.password2}}</div>
+            </div>
             <input type="submit" class="btn btn-info btn-block mt-4">
           </form>
           </div>
@@ -26,7 +38,8 @@ export default {
       username: '',
       email: '',
       password: '',
-      password2: ''
+      password2: '',
+      errors: {}
     }
   },
   methods: {
@@ -40,7 +53,11 @@ export default {
         }
         axios.post('http://localhost:3500/api/users/register', formData)
           .then(res => console.log(res))
-          .catch(err => console.log(err))
+          .catch(err => {
+            if(err.response.status === 400) {
+              this.errors = err.response.data
+            }
+          })
       }
     }
   },

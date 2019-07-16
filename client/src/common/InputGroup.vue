@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
-    <input class="form-control form-control-lg" :type="inputType" :name="textName" :placeholder="placeholder"
-           ref="input" :value="value" v-on:input="updateValue($event.target.value)"/>
+    <input v-bind:class="{'form-control':true,'form-control-lg':true,'is-invalid': error}" :type="inputType" :name="textName" :placeholder="placeholder"
+           :error="error" ref="input" :value="value" v-on:input="updateValue($event.target.value)"/>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 
     }
   },
-  props: ['textName', 'placeholder', 'inputType', 'value'],
+  props: ['textName', 'placeholder', 'inputType', 'value', 'error'],
   methods: {
     updateValue (val) {
       this.$emit('input', val)
