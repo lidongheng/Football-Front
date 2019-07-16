@@ -33,6 +33,12 @@ export default {
       errors: {}
     }
   },
+  beforeRouteEnter: (to, from, next) => {
+      next(vm => {
+        vm.$store.dispatch('setUser', null);
+        vm.$store.dispatch("setLogin", false);
+      })
+  },
   methods: {
     onSubmit () {
       const formData = {
@@ -42,9 +48,12 @@ export default {
       axios.post('http://localhost:3500/api/users/login', formData)
         .then(res => {
           if (res.data.success) {
-            // localStorage.setItem('token', res.data.token);
-            this.$store.dispatch('setUser', res.data.email)
-            this.$router.push({path:'home'})
+            this.$store.dispatch('setUser', res.data.email);
+            this.$router.push({path:'home'});
+            this.$store.dispatch('setLogin', true);
+            localStorage.setItem('user', res.data.email);
+            localStorage.setItem('token', res.data.token);
+
           }
         })
         .catch(err => {

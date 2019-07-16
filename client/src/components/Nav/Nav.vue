@@ -50,7 +50,8 @@
           <router-link tag="a" class="nav-link" to="/login">登录</router-link>
         </li>
         <li class="nav-item" v-show="isLogin">
-          <router-link tag="a" class="nav-link" to="/exit">[退出]</router-link>
+          <!-- <router-link tag="a" class="nav-link" to="/exit">[退出]</router-link>-->
+          <span class="nav-link" @click="loginOut">[退出]</span>
         </li>
       </ul>
       <!--
@@ -75,7 +76,7 @@
 export default {
   data () {
     return {
-      isAuthenticated: false
+
     }
   },
   computed: {
@@ -84,6 +85,15 @@ export default {
     },
     isLogin () {
       return this.$store.getters.isLogin
+    }
+  },
+  methods: {
+    loginOut () {
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      this.$store.dispatch("setLogin", false);
+      this.$store.dispatch("setUser", null);
+      this.$router.push({path:'login'})
     }
   }
   /*updated:function () {
