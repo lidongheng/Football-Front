@@ -53,7 +53,7 @@ class UserController {
         if(match) {
             // @ts-ignore
             const rule = {id:user.id,email:user.email};
-            const token = await jwt.sign(rule,SecretOrKey,{expiresIn:3600});
+            const token = await jwt.sign(rule,SecretOrKey,{expiresIn:36000});
             // @ts-ignore
             res.json({success:true,token:"Bearer " + token,email:user.email});
         } else {
