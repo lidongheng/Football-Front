@@ -12,9 +12,7 @@
 
 <style scoped>
   footer {
-    position:absolute;
-    bottom:0;
+    flex: 0 0 auto;
     width:100%;
   }
-
 </style>

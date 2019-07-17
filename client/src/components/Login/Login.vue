@@ -6,11 +6,11 @@
           <h1 class="display-4 text-center">登录</h1>
           <form @submit.prevent="onSubmit">
             <div class="form-group">
-              <InputGroup inputType="email" textName="email" placeholder="邮箱" :error="errors.email" v-model="email"/>
+              <InputItem inputType="email" textName="email" placeholder="邮箱" :error="errors.email" v-model="email"/>
               <div class="invalid-feedback d-block">{{errors.email}}</div>
             </div>
             <div class="form-group">
-              <InputGroup inputType="password" textName="password" placeholder="密码" :error="errors.password" v-model="password"/>
+              <InputItem inputType="password" textName="password" placeholder="密码" :error="errors.password" v-model="password"/>
               <div class="invalid-feedback d-block">{{errors.password}}</div>
             </div>
             <input type="submit" class="btn btn-info btn-block mt-4">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import InputGroup from '../../common/InputGroup'
+import InputItem from '../../common/InputItem'
 import axios from 'axios'
 export default {
   data () {
@@ -34,10 +34,10 @@ export default {
     }
   },
   beforeRouteEnter: (to, from, next) => {
-      next(vm => {
-        vm.$store.dispatch('setUser', null);
-        vm.$store.dispatch("setLogin", false);
-      })
+    next(vm => {
+      vm.$store.dispatch('setUser', null)
+      vm.$store.dispatch('setLogin', false)
+    })
   },
   methods: {
     onSubmit () {
@@ -48,16 +48,15 @@ export default {
       axios.post('http://localhost:3500/api/users/login', formData)
         .then(res => {
           if (res.data.success) {
-            this.$store.dispatch('setUser', res.data.email);
-            this.$router.push({path:'home'});
-            this.$store.dispatch('setLogin', true);
-            localStorage.setItem('user', res.data.email);
-            localStorage.setItem('token', res.data.token);
-
+            this.$store.dispatch('setUser', res.data.email)
+            this.$router.push({path: 'home'})
+            this.$store.dispatch('setLogin', true)
+            localStorage.setItem('user', res.data.email)
+            localStorage.setItem('token', res.data.token)
           }
         })
         .catch(err => {
-          if(err.response.status === 400) {
+          if (err.response.status === 400) {
             this.errors = err.response.data
           } else {
             console.log(err.response)
@@ -66,7 +65,7 @@ export default {
     }
   },
   components: {
-    InputGroup
+    InputItem
   }
 }
 </script>

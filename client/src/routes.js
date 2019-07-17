@@ -4,8 +4,9 @@ import Register from './components/Register/Register'
 import TimeLine from './components/TimeLine/TimeLine'
 import PremierLeague from './components/PremierLeague/PremierLeague'
 import ChineseSuperLeague from './components/ChineseSuperLeague/ChineseSuperLeague'
-import News from './components/News/News'
 import Report from './components/Report/Report'
+import addReport from './components/Report/addReport'
+import Temp from './components/Temp/Temp'
 
 export const routes = [
   {path: '/', redirect: '/home'},
@@ -15,6 +16,7 @@ export const routes = [
   {path: '/timeline', component: TimeLine},
   {path: '/ChineseSuperLeague', component: ChineseSuperLeague},
   {path: '/premierLeague', component: PremierLeague},
-  {path: '/news', component: News},
+  {path: '/temp', component: Temp},
+  {path: '/report/add', name: 'addReportLink', component: addReport},
   {path: '/report', component: Report}
 ]

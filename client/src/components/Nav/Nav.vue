@@ -15,7 +15,7 @@
           <router-link tag="a" class="nav-link" to="/timeline">时间线</router-link>
         </li>
         <li class="nav-item">
-          <router-link tag="a" class="nav-link" to="/newsItem">临时</router-link>
+          <router-link tag="a" class="nav-link" to="/temp">临时</router-link>
         </li>
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/premierLeague">英超</router-link>
@@ -89,19 +89,13 @@ export default {
   },
   methods: {
     loginOut () {
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
-      this.$store.dispatch("setLogin", false);
-      this.$store.dispatch("setUser", null);
-      this.$router.push({path:'login'})
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      this.$store.dispatch('setLogin', false)
+      this.$store.dispatch('setUser', null)
+      this.$router.push({path: 'login'})
     }
   }
-  /*updated:function () {
-    if (localStorage.getItem('token')) {
-      this.$refs.navbar.isAuthenticated = true
-    }
-
-  }*/
 }
 </script>
 

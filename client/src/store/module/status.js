@@ -7,14 +7,14 @@ const getters = {
 }
 
 const mutations = {
-  loginStatus(state, status) {
+  loginStatus (state, status) {
     state.isLogin = status
   }
 }
 
 const actions = {
-  setLogin({ commit }, status) {
-    commit("loginStatus", status)
+  setLogin ({ commit }, status) {
+    commit('loginStatus', status)
   }
 }
 
