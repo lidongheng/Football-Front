@@ -15,6 +15,15 @@
         <div class="invalid-feedback d-block">{{errors.league}}</div>
       </div>
     </div>
+      <div class="row">
+        <div class="col-md-2">
+          <LabelItem textName="轮次："/>
+        </div>
+        <div class="col-md-10">
+          <InputItem inputType="text" textName="rounds" placeholder="如：第20轮、小组赛第6轮" :error="errors.rounds" v-model="rounds"/>
+          <div class="invalid-feedback d-block">{{errors.rounds}}</div>
+        </div>
+      </div>
     <div class="row">
       <div class="col-md-2">
        <LabelItem textName="比赛场次："/>
@@ -202,6 +211,7 @@ export default {
         {'id': 8, 'name': '易胜博'}
       ],
       league: '',
+      rounds: '',
       host: '',
       away: '',
       matchTime: '',
@@ -226,6 +236,7 @@ export default {
     onSubmit () {
       const report = {
         league: this.league,
+        rounds: this.rounds,
         host: this.host,
         away: this.away,
         matchTime: this.matchTime,
