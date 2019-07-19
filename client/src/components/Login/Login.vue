@@ -36,8 +36,8 @@ export default {
   },
   beforeRouteEnter: (to, from, next) => {
     next(vm => {
-      vm.$store.dispatch('setUser', null)
-      vm.$store.dispatch('setLogin', false)
+      vm.$store.dispatch('setUser', {user: null})
+      vm.$store.dispatch('setLogin', {isLogin: false})
     })
   },
   methods: {
