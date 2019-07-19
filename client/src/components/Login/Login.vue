@@ -25,6 +25,7 @@
 <script>
 import InputItem from '../../common/InputItem'
 import axios from 'axios'
+import jwt_decode from 'jwt-decode'
 export default {
   data () {
     return {
@@ -48,11 +49,16 @@ export default {
       axios.post('http://localhost:3500/api/users/login', formData)
         .then(res => {
           if (res.data.success) {
-            this.$store.dispatch('setUser', res.data.email)
+            // this.$store.dispatch('setUser', res.data.email)
+            // this.$store.commit('setUser', res.data.email);
+            this.$store.dispatch('setUser', {user: res.data.email})
             this.$router.push({path: 'home'})
-            this.$store.dispatch('setLogin', true)
+            // this.$store.dispatch('setLogin', true)
+            // this.$store.commit('setLogin', true)
+            this.$store.dispatch('setLogin', {isLogin: true})
             localStorage.setItem('user', res.data.email)
             localStorage.setItem('token', res.data.token)
+            const decoded = jwt_decode(res.data.token)
           }
         })
         .catch(err => {

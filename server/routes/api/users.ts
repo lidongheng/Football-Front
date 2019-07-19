@@ -37,6 +37,6 @@ usersRouter.post('/login', (req, res) => {
 // $route GET api/users/current
 // @desc return current user
 // @access private
-usersRouter.get('/current', passport.authenticate("jwt",{session:false}),(req, res) => {
+usersRouter.get('/current', passport.authenticate("jwt",{session:false}), (req, res) => {
     res.json(req.user);
 });

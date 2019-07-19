@@ -1,5 +1,5 @@
 const state = {
-  isLogin: false
+  isLogin: localStorage.user || false
 }
 
 const getters = {
@@ -7,14 +7,17 @@ const getters = {
 }
 
 const mutations = {
-  loginStatus (state, status) {
-    state.isLogin = status
+  loginStatus (state, payload) {
+    state.isLogin = payload.isLogin
   }
+  // setLogin (state, status) {
+  //   state.isLogin = status
+  // }
 }
 
 const actions = {
-  setLogin ({ commit }, status) {
-    commit('loginStatus', status)
+  setLogin (context, payload) {
+    context.commit('loginStatus', payload)
   }
 }
 

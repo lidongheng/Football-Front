@@ -91,8 +91,12 @@ export default {
     loginOut () {
       localStorage.removeItem('user')
       localStorage.removeItem('token')
-      this.$store.dispatch('setLogin', false)
-      this.$store.dispatch('setUser', null)
+      // this.$store.dispatch('setLogin', false)
+      // this.$store.commit('setLogin', false)
+      this.$store.dispatch('setLogin', {isLogin: false})
+      // this.$store.dispatch('setUser', null)
+      // this.$store.commit('setUser', null)
+      this.$store.dispatch('setUser', {user: null})
       this.$router.push({path: 'login'})
     }
   }

@@ -1,5 +1,5 @@
 const state = {
-  currentUser: localStorage.user || null
+  currentUser: localStorage.user || false
 }
 
 const getters = {
@@ -7,18 +7,21 @@ const getters = {
 }
 
 const mutations = {
-  userStatus (state, user) {
-    if (user) {
-      state.currentUser = user
+  userStatus (state, payload) {
+    if (payload.user) {
+      state.currentUser = payload.user
     } else {
       state.currentUser = null
     }
   }
+  // setUser (state, user) {
+  //   state.currentUser = user
+  // }
 }
 
 const actions = {
-  setUser ({commit}, user) {
-    commit('userStatus', user)
+  setUser (context, payload) {
+    context.commit('userStatus', payload)
   }
 }
 
