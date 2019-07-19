@@ -1,14 +1,14 @@
 <template>
   <div class="news">
-    <span class="date">2019-07-10</span>
-    <span class="tab">资讯</span>
+    <span class="date">{{time}}</span>
+    <span class="tab">{{category}}</span>
     <a class="news_title" href="#">{{newsTitle}}</a>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['newsTitle']
+  props: ['time', 'category', 'newsTitle']
 }
 </script>
 

@@ -4,7 +4,7 @@
       <div class="col-md-12 ml-auto">
         <div class="navbar_wrapper">
           <ul>
-            <li v-for="img in imgList">
+            <li v-for="(img,index) in imgList" :key="index">
               <a href="#">
                 <img :src="img.image" alt="arsenal">
               </a>

@@ -24,7 +24,7 @@
 
 <script>
 import InputItem from '../../common/InputItem'
-import jwt_decode from 'jwt-decode'
+// import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import setAuthToken from '../../../utils/setAuthToken'
 export default {
@@ -59,7 +59,7 @@ export default {
             this.$store.dispatch('setLogin', {isLogin: true})
             localStorage.setItem('user', res.data.email)
             localStorage.setItem('token', res.data.token)
-            const decoded = jwt_decode(res.data.token)
+            // const decoded = jwt_decode(res.data.token)
             this.$router.push({path: 'home'})
           }
         })

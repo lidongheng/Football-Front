@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 export const BetFormSchema = new Schema({
-    username:{
+    user:{
         type:Schema.Types.ObjectId,
         ref:"users"
     },

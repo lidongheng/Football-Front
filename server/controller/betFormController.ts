@@ -38,6 +38,12 @@ class BetFormController {
         });
 
     }
+
+    public async getList (req: Request, res: Response) {
+        const match = await BetFormModel.find({}, "_id host away date").populate('user','username _id').exec();
+        return res.status(200).json({match: match});
+    }
+
 }
 
 export default BetFormController;
