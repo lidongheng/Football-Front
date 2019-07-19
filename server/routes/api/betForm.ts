@@ -14,8 +14,15 @@ betFormRouter.get('/test', (req, res) => {
 
 // $route GET api/betForm
 // @desc 返回的请求的json数据
-// @access public
+// @access private
 betFormRouter.get('/', passport.authenticate("jwt",{session:false}), (req, res) => {
     console.log('userid: ' + req.user.id);
     console.log('body:' + req.body);
+});
+
+// $route POST api/betForm
+// @desc 返回的请求的json数据
+// @access public
+betFormRouter.post('/', passport.authenticate("jwt",{session:false}), (req, res) => {
+    betForm.create(req, res);
 });

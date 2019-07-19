@@ -24,8 +24,9 @@
 
 <script>
 import InputItem from '../../common/InputItem'
-import axios from 'axios'
 import jwt_decode from 'jwt-decode'
+import axios from 'axios'
+import setAuthToken from '../../../utils/setAuthToken'
 export default {
   data () {
     return {
@@ -51,22 +52,24 @@ export default {
           if (res.data.success) {
             // this.$store.dispatch('setUser', res.data.email)
             // this.$store.commit('setUser', res.data.email);
+            setAuthToken(res.data.token)
             this.$store.dispatch('setUser', {user: res.data.email})
-            this.$router.push({path: 'home'})
             // this.$store.dispatch('setLogin', true)
             // this.$store.commit('setLogin', true)
             this.$store.dispatch('setLogin', {isLogin: true})
             localStorage.setItem('user', res.data.email)
             localStorage.setItem('token', res.data.token)
             const decoded = jwt_decode(res.data.token)
+            this.$router.push({path: 'home'})
           }
         })
         .catch(err => {
-          if (err.response.status === 400) {
-            this.errors = err.response.data
-          } else {
-            console.log(err.response)
-          }
+          // if (err.response.status === 400) {
+          //   this.errors = err.response.data
+          // } else {
+          //   console.log(err.response)
+          // }
+          console.log(err)
         })
     }
   },

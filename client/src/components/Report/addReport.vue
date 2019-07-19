@@ -197,6 +197,7 @@ import InputItem from '../../common/InputItem'
 import InputGroup from '../../common/InputGroup'
 import LabelItem from '../../common/LabelItem'
 import TextAreaItem from '../../common/TextAreaItem'
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -255,7 +256,13 @@ export default {
         hostNews: this.hostNews,
         awayNews: this.awayNews
       }
-      console.log(report)
+      axios.post('http://localhost:3500/api/betForm/', report)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   components: {
