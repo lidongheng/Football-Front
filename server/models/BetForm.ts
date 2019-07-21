@@ -29,42 +29,6 @@ export const BetFormSchema = new Schema({
         type:String,
         required:true
     },
-    EuroCompanyId:{
-        type:Number,
-        required:true
-    },
-    AsiaCompanyId:{
-        type:Number,
-        required:true
-    },
-    Euroodd:{
-        winOdd: {
-            type:String,
-            required:true
-        },
-        drawOdd: {
-            type:String,
-            required:true
-        },
-        loseOdd: {
-            type:String,
-            required:true
-        }
-    },
-    Asiaodd:{
-        winOdd: {
-            type:String,
-            required:true
-        },
-        drawOdd: {
-            type:String,
-            required:true
-        },
-        loseOdd: {
-            type:String,
-            required:true
-        }
-    },
     isSingleMatch:{
         type:Number,
         required:true

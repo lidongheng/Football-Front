@@ -1,4 +1,4 @@
-export interface NewBetForm {
+export interface BetForm {
     user: string;
     league: string;
     rounds: string;
@@ -6,10 +6,6 @@ export interface NewBetForm {
     away: string;
     matchTime: string;
     isSingleMatch: number;
-    EuroCompanyId: number;
-    AsiaCompanyId: number;
-    Euroodd: object;
-    Asiaodd: object;
     analysis: string;
     hostInjury: string;
     awayInjury: string;

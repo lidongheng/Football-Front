@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {NewUser} from "../interface/newUser";
+import {User} from "../interface/user";
 import bcrypt from "bcrypt";
 import * as jwt from 'jsonwebtoken';
 import SecretOrKey from '../config/secret';
@@ -23,7 +23,7 @@ class UserController {
         }
         const saltRounds = 10;
         req.body.password = await bcrypt.hash(req.body.password, saltRounds);
-        const newUser: NewUser = {
+        const newUser: User = {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password

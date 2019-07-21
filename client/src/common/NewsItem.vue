@@ -2,13 +2,13 @@
   <div class="news">
     <span class="date">{{time}}</span>
     <span class="tab">{{category}}</span>
-    <a class="news_title" href="#">{{newsTitle}}</a>
+    <router-link tag="a" class="news_title" :to="'/report/'+link">{{newsTitle}}</router-link>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['time', 'category', 'newsTitle']
+  props: ['time', 'category', 'newsTitle', 'link']
 }
 </script>
 

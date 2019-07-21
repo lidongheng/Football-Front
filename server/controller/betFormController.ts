@@ -1,11 +1,10 @@
 import {Request, Response} from 'express';
 import { BetFormModel } from '../models/BetForm';
-import {NewBetForm} from "../interface/newBetForm";
-
+import {BetForm} from "../interface/betForm";
 
 class BetFormController {
-    public create(req: Request, res: Response) {
-        const newBetForm:NewBetForm = {
+    public async create(req: Request, res: Response) {
+        const newBetForm:BetForm = {
             user: req.user.id,
             league: req.body.league,
             rounds: req.body.rounds,
@@ -13,10 +12,6 @@ class BetFormController {
             away: req.body.away,
             matchTime: req.body.matchTime,
             isSingleMatch: req.body.isSingleMatch,
-            EuroCompanyId: req.body.EuroCompanyId,
-            AsiaCompanyId: req.body.AsiaCompanyId,
-            Euroodd: req.body.Euroodd,
-            Asiaodd: req.body.Asiaodd,
             analysis: req.body.analysis,
             hostInjury: req.body.hostInjury,
             awayInjury: req.body.awayInjury,
@@ -29,13 +24,13 @@ class BetFormController {
         };
         // @ts-ignore
         const newBetFormModel = new BetFormModel(newBetForm);
-        newBetFormModel.save((err: any, betForm: any) => {
-            if (err) {
-                return res.status(400).json({error:err});
-            } else {
-                return res.status(200).json({success:true});
-            }
+        const match = await newBetFormModel.save();
+        process.on('unhandledRejection', error => {
+            console.error('unhandledRejection', error);
+            process.exit(1) // To exit with a 'failure' code
         });
+        return res.status(200).json({success:true, matchId: match._id});
+
 
     }
 
@@ -44,6 +39,10 @@ class BetFormController {
         return res.status(200).json({match: match});
     }
 
+    public async getDetail (req: Request, res: Response) {
+        const form = await BetFormModel.findById(req.params.id);
+        return res.status(200).json({form});
+    }
 }
 
 export default BetFormController;

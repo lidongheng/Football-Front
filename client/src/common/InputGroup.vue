@@ -24,6 +24,6 @@ export default {
 <style scoped>
   input {
     display: inline-block;
-    width:10%;
+    width:15%;
   }
 </style>

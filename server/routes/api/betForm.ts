@@ -22,12 +22,12 @@ betFormRouter.get('/', passport.authenticate("jwt",{session:false}), (req, res) 
 
 // $route POST api/betForm
 // @desc 返回的请求的json数据
-// @access public
+// @access private
 betFormRouter.post('/', passport.authenticate("jwt",{session:false}), (req, res) => {
-    betForm.create(req, res);
+    betForm.create(req, res).catch(err => console.log(err));
 });
 
-// $route POST api/betForm/match
+// $route GET api/betForm/match
 // @desc 返回的请求的json数据
 // @access public
 betFormRouter.get('/match', (req, res) => {
@@ -35,4 +35,12 @@ betFormRouter.get('/match', (req, res) => {
         .catch(err => {
             console.log(err);
         })
+});
+
+// $route GET api/betForm/:id/
+// @desc 返回的请求的json数据
+// @access public
+betFormRouter.get('/:id/', (req, res) => {
+    betForm.getDetail(req, res)
+        .catch(err => {console.log(err)});
 });
