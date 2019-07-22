@@ -10,6 +10,7 @@ import ReportDetail from './components/Report/ReportDetail/ReportDetail'
 import FundamentalForm from './components/Report/addReport/FundamentalForm'
 import AsiaOddForm from './components/Report/addReport/AsiaOddForm'
 import EuroOddForm from './components/Report/addReport/EuroOddForm'
+import EditReport from './components/Report/EditReport'
 
 import Intention from './components/Report/ReportDetail/Intention'
 import Lineup from './components/Report/ReportDetail/Lineup'
@@ -22,7 +23,7 @@ import Style from './components/Report/ReportDetail/Style'
 export const routes = [
   {path: '/', redirect: '/home'},
   {path: '/home', name: 'homeLink', component: Home},
-  {path: '/login', component: Login},
+  {path: '/login', name: 'loginLink', component: Login},
   {path: '/register', component: Register},
   {path: '/timeline', component: TimeLine},
   {path: '/ChineseSuperLeague', component: ChineseSuperLeague},
@@ -31,7 +32,8 @@ export const routes = [
   {path: '/report/add/fundamental', name: 'fundamentalLink', component: FundamentalForm},
   {path: '/report/add/AsiaOdd/:id/', name: 'AsiaOddLink', component: AsiaOddForm},
   {path: '/report/add/EuroOdd/:id/', name: 'EuroOddLink', component: EuroOddForm},
-  {path: '/report', component: Report},
+  {path: '/report', name: 'reportLink', component: Report},
+  {path: '/report/edit/:id/', component: EditReport},
   {path: '/report/:id/',
     name: 'reportDetailLink',
     component: ReportDetail,

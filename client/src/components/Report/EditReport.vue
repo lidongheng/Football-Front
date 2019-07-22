@@ -1,17 +1,10 @@
 <template>
   <div class="fundamentalForm">
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="mySubmit">
       <div class="row">
         <div class="col-md-12">
-          <h3 class="text-center display-4 my-4">新增投注单</h3>
+          <h3 class="text-center display-4 my-4">修改投注单</h3>
           <h6 class="text-center my-4">基本面详情</h6>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="progress mb-4">
-            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
         </div>
       </div>
       <div class="row">
@@ -175,14 +168,14 @@
 </template>
 
 <script>
-import InputItem from '../../../common/InputItem'
-import LabelItem from '../../../common/LabelItem'
-import TextAreaItem from '../../../common/TextAreaItem'
+import InputItem from '../../common/InputItem'
+import LabelItem from '../../common/LabelItem'
+import TextAreaItem from '../../common/TextAreaItem'
 import axios from 'axios'
 export default {
   data () {
     return {
-
+      id: '',
       league: '',
       rounds: '',
       host: '',
@@ -201,9 +194,53 @@ export default {
       errors: {}
     }
   },
+  created () {
+    this.id = this.$route.params.id
+    if (this.$store.getters.report && this.$store.getters.report._id === this.id) {
+      const report = this.$store.getters.report
+      this.league = report.league
+      this.rounds = report.rounds
+      this.host = report.host
+      this.away = report.away
+      this.matchTime = report.matchTime
+      this.isSingleMatch = report.isSingleMatch
+      this.analysis = report.analysis
+      this.hostInjury = report.hostInjury
+      this.awayInjury = report.awayInjury
+      this.hostExpectLineup = report.hostExpectLineup
+      this.hostExpectBench = report.hostExpectBench
+      this.awayExpectLineup = report.awayExpectLineup
+      this.awayExpectBench = report.awayExpectBench
+      this.hostNews = report.hostNews
+      this.awayNews = report.awayNews
+    } else {
+    axios.get(`http://localhost:3500/api/betForm/${this.id}/`)
+        .then(res => {
+          this.$store.dispatch('setReport', {report: res.data.form})
+          const report = this.$store.getters.report
+          this.league = report.league
+          this.rounds = report.rounds
+          this.host = report.host
+          this.away = report.away
+          this.matchTime = report.matchTime
+          this.isSingleMatch = report.isSingleMatch
+          this.analysis = report.analysis
+          this.hostInjury = report.hostInjury
+          this.awayInjury = report.awayInjury
+          this.hostExpectLineup = report.hostExpectLineup
+          this.hostExpectBench = report.hostExpectBench
+          this.awayExpectLineup = report.awayExpectLineup
+          this.awayExpectBench = report.awayExpectBench
+          this.hostNews = report.hostNews
+          this.awayNews = report.awayNews
+        })
+        .catch(err => console.log(err))
+    }
+  },
   methods: {
-    onSubmit () {
+    mySubmit () {
       const report = {
+        id: this.id,
         league: this.league,
         rounds: this.rounds,
         host: this.host,
@@ -222,8 +259,10 @@ export default {
       }
       axios.post('http://localhost:3500/api/betForm/', report)
         .then(res => {
-          console.log(res)
-          this.$router.push({name: 'reportLink'})
+          if (res.status === 200) {
+            console.log(res)
+            this.$router.push({path: `/report/${res.data.matchId}/`})
+          }
         })
         .catch(err => {
           console.log(err)
@@ -239,60 +278,5 @@ export default {
 </script>
 
 <style scoped>
-  @font-face {
-    font-family: 'Glyphicons Halflings';
-    src: url('../../../../static/fonts/glyphicons-halflings-regular.eot');
-    src: url('../../../../static/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../../../static/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../../../static/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../../../static/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-  }
-  .checkbox-custom {
-    position: relative;
-    padding: 0 15px 0 25px;
-    margin-bottom: 7px;
-    margin-top: 0;
-    display: inline-block;
-  }
-  .checkbox-custom input[type="checkbox"] {
-    opacity: 0;/*将初始的checkbox隐藏起来*/
-    position: absolute;
-    cursor: pointer;
-    z-index: 2;
-    margin: -6px 0 0 0;
-    top: 50%;
-    left: 3px;
-  }
-  .checkbox-custom label:before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    margin-top: -9px;
-    width: 19px;
-    height: 18px;
-    display: inline-block;
-    border-radius: 2px;
-    border: 1px solid #bbb;
-    background: #fff;
-  }
-  .checkbox-custom input[type="checkbox"]:checked +label:after {
-    position: absolute;
-    display: inline-block;
-    font-family: 'Glyphicons Halflings';
-    content: "\e013";
-    top: 42%;
-    left: 3px;
-    margin-top: -5px;
-    font-size: 11px;
-    line-height: 1;
-    width: 16px;
-    height: 16px;
-    color: #333;
-  }
-  .checkbox-custom label {
-    cursor: pointer;
-    line-height: 1.2;
-    font-weight: normal;/*改变了rememberme的字体*/
-    margin-bottom: 0;
-    text-align: left;
-  }
 
 </style>

@@ -1,6 +1,6 @@
 // @ts-ignore
 import mongoose from 'mongoose';
-
+mongoose.set('useFindAndModify', false)
 // @ts-ignore
 const Schema = mongoose.Schema;
 

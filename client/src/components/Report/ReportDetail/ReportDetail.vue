@@ -51,6 +51,7 @@ export default {
     axios.get(`http://localhost:3500/api/betForm/${this.id}/`)
       .then(res => {
         if (res.status === 200) {
+          console.log(res.data.form)
           this.$store.dispatch('setReport', {report: res.data.form})
         }
       })

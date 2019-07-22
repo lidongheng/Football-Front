@@ -97,7 +97,7 @@ export default {
       // this.$store.dispatch('setUser', null)
       // this.$store.commit('setUser', null)
       this.$store.dispatch('setUser', {user: null})
-      this.$router.push({path: 'login'})
+      this.$router.push({name: 'loginLink'})
     }
   }
 }

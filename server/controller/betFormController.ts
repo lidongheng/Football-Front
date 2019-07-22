@@ -3,7 +3,8 @@ import { BetFormModel } from '../models/BetForm';
 import {BetForm} from "../interface/betForm";
 
 class BetFormController {
-    public async create(req: Request, res: Response) {
+    public async createOrEdit(req: Request, res: Response) {
+        console.log(req)
         const newBetForm:BetForm = {
             user: req.user.id,
             league: req.body.league,
@@ -22,6 +23,21 @@ class BetFormController {
             hostNews: req.body.hostNews,
             awayNews: req.body.awayNews
         };
+        if(req.body.id){
+            const form = await BetFormModel.findOne({_id: req.body.id})
+            if(form){
+                // 原有比赛存在，执行更新方法
+                const form = await BetFormModel.findOneAndUpdate({_id: req.body.id}, {$set: newBetForm}, {new: true})
+                if (form) {
+                    return res.status(200).json({success: true, matchId: req.body.id})
+                } else {
+                    return res.status(408).json({message: '执行更新方法失败！'})
+                }
+            } else {
+                return res.status(400).json({message: '找不到该场比赛！'})
+            }
+        }
+
         // @ts-ignore
         const newBetFormModel = new BetFormModel(newBetForm);
         const match = await newBetFormModel.save();

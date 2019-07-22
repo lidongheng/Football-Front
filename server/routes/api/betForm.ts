@@ -24,7 +24,7 @@ betFormRouter.get('/', passport.authenticate("jwt",{session:false}), (req, res) 
 // @desc 返回的请求的json数据
 // @access private
 betFormRouter.post('/', passport.authenticate("jwt",{session:false}), (req, res) => {
-    betForm.create(req, res).catch(err => console.log(err));
+    betForm.createOrEdit(req, res).catch(err => console.log(err));
 });
 
 // $route GET api/betForm/match

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+mongoose.set('useFindAndModify', false)
 const Schema = mongoose.Schema;
 
 export const UserSchema = new Schema({
