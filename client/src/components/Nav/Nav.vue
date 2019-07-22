@@ -24,7 +24,7 @@
           <router-link tag="a" class="nav-link" to="/ChineseSuperLeague">中超</router-link>
         </li>
         <li class="nav-item">
-          <router-link tag="a" class="nav-link" to="/news">新闻</router-link>
+          <router-link tag="a" class="nav-link" to="/comment">热评</router-link>
         </li>
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/report">报告</router-link>

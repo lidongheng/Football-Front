@@ -1,10 +1,9 @@
 // @ts-ignore
 import mongoose from 'mongoose';
-mongoose.set('useFindAndModify', false)
 // @ts-ignore
 const Schema = mongoose.Schema;
 
-export const companySchema = new Schema({
+export const CompanySchema = new Schema({
     cid:{
         type:Number,
         required:true
@@ -19,4 +18,4 @@ export const companySchema = new Schema({
     }
 });
 
-export const companyModel = mongoose.model("company", companySchema);
+export const CompanyModel = mongoose.model("company", CompanySchema);

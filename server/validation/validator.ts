@@ -71,6 +71,19 @@ export class Validator {
         };
     }
 
+    public static commentInput (data: any) {
+        data.content = !this.isEmpty(data.content) ? data.content : '';
+        let errors = {content:""};
+        if(!validator.isLength(data.content,{max:140})) {
+            errors.content = '输入字数超过140字！';
+        }
+        return {
+            errors,
+            // @ts-ignore
+            isValid:this.isEmpty(errors)
+        };
+    }
+
     private static isEmpty (value: any) {
         if (typeof value === 'string' && value.trim().length === 0) {
             return true

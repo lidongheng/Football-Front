@@ -11,6 +11,7 @@ import FundamentalForm from './components/Report/addReport/FundamentalForm'
 import AsiaOddForm from './components/Report/addReport/AsiaOddForm'
 import EuroOddForm from './components/Report/addReport/EuroOddForm'
 import EditReport from './components/Report/EditReport'
+import Comment from './components/Comment/Comment'
 
 import Intention from './components/Report/ReportDetail/Intention'
 import Lineup from './components/Report/ReportDetail/Lineup'
@@ -29,6 +30,7 @@ export const routes = [
   {path: '/ChineseSuperLeague', component: ChineseSuperLeague},
   {path: '/premierLeague', component: PremierLeague},
   {path: '/temp', component: Temp},
+  {path: '/comment', component: Comment},
   {path: '/report/add/fundamental', name: 'fundamentalLink', component: FundamentalForm},
   {path: '/report/add/AsiaOdd/:id/', name: 'AsiaOddLink', component: AsiaOddForm},
   {path: '/report/add/EuroOdd/:id/', name: 'EuroOddLink', component: EuroOddForm},

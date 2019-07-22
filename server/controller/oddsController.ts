@@ -1,7 +1,7 @@
 import {Request, Response} from 'express';
 import { AsiaOddsModel } from '../models/AsiaOdds';
 import { EuroOddsModel } from "../models/EuroOdds";
-import { companyModel } from "../models/company";
+import { CompanyModel } from "../models/Company";
 import { AsiaOdds } from "../interface/AsiaOdds";
 import { EuroOdds } from "../interface/EuroOdds";
 import { company } from "../interface/company";
@@ -14,7 +14,7 @@ class OddsController {
             description: req.body.description
         }
         // @ts-ignore
-        const newCompanyModel = new companyModel(newCompany);
+        const newCompanyModel = new CompanyModel(newCompany);
         newCompanyModel.save((err: any, company: any) => {
             if (err) {
                 return res.status(400).json({error:err});

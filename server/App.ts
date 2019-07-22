@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import {usersRouter} from "./routes/api/users";
 import {betFormRouter} from "./routes/api/betForm";
 import {oddsRouter} from "./routes/api/odds";
+import {commentRouter} from "./routes/api/comment";
 import mongoose from 'mongoose';
 import db from './config/db';
 import path from "path";
@@ -58,6 +59,7 @@ class App {
         this.app.use('/api/users', usersRouter);
         this.app.use('/api/betForm', betFormRouter);
         this.app.use('/api/odds', oddsRouter);
+        this.app.use('/api/comment', commentRouter);
         this.app.use('/', (req, res) => {
             res.status(200).send({ message: `node-api is working!`});
         });
