@@ -1,11 +1,12 @@
 <template>
   <div class="reportDetail">
-    <div class="row">
+    <div class="row mt-3">
       <div class="col-12">
-        <h1 class="text-center display-5 mt-4">分析页面</h1>
+        <h1 class="text-center display-5 mt-4">{{host}}vs{{away}}</h1>
+        <h5 class="text-center">{{date}}</h5>
       </div>
     </div>
-    <div class="row mb-5">
+    <div class="row mb-5 mt-5">
       <div class="col-4">
         <router-link tag="li" class="nav-link" :to="'/report/intention/'+id+'/'">
           <a class="list-group-item list-group-item-action">战意分析</a>
@@ -46,20 +47,31 @@ export default {
     }
   },
   created () {
-    this.getReport()
     this.id = this.$route.params.id
+    axios.get(`http://localhost:3500/api/betForm/${this.id}/`)
+      .then(res => {
+        if (res.status === 200) {
+          this.$store.dispatch('setReport', {report: res.data.form})
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
+  computed: {
+    // 在vuex中获取数据
+    host () {
+      return this.$store.getters.report.host
+    },
+    away () {
+      return this.$store.getters.report.away
+    },
+    date () {
+      return this.$store.getters.report.matchTime
+    }
   },
   methods: {
-    getReport () {
-      let nid = this.$route.params.id
-      axios.get(`http://localhost:3500/api/betForm/${nid}/`)
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
+
   }
 }
 </script>
