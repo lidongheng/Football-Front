@@ -178,7 +178,6 @@
 import InputItem from '../../../common/InputItem'
 import LabelItem from '../../../common/LabelItem'
 import TextAreaItem from '../../../common/TextAreaItem'
-import axios from 'axios'
 export default {
   data () {
     return {
@@ -220,7 +219,7 @@ export default {
         hostNews: this.hostNews,
         awayNews: this.awayNews
       }
-      axios.post('http://localhost:3500/api/betForm/', report)
+      this.$axios.post('/api/betForm/', report)
         .then(res => {
           console.log(res)
           this.$router.push({name: 'reportLink'})

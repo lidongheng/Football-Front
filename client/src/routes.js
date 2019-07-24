@@ -47,5 +47,6 @@ export const routes = [
       {path: '/report/style/:id/', component: Style},
       {path: '/report/mediaVoice/:id/', component: MediaVoice},
       {path: '/report/other/:id/', component: Other}
-    ]}
+    ]},
+  {path: '*', redirect: '/'}
 ]

@@ -12,14 +12,14 @@ export const CommentSchema = new Schema({
         type:String,
         required:true
     },
-    like: {
-        type:Number,
-        default:0
-    },
-    unlike: {
-        type:Number,
-        default:0
-    },
+    likes: [
+        {
+            user: {
+                type:Schema.Types.ObjectId,
+                ref:"users"
+            }
+        }
+    ],
     date:{
         type:Date,
         default:Date.now()

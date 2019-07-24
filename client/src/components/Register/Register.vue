@@ -31,7 +31,6 @@
 </template>
 <script>
 import InputItem from '../../common/InputItem'
-import axios from 'axios'
 export default {
   data () {
     return {
@@ -51,7 +50,7 @@ export default {
           password: this.password,
           password2: this.password2
         }
-        axios.post('http://localhost:3500/api/users/register', formData)
+        this.$axios.post('/api/users/register', formData)
           .then(res => console.log(res))
           .catch(err => {
             if (err.response.status === 400) {

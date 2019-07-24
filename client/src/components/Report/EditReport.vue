@@ -171,7 +171,6 @@
 import InputItem from '../../common/InputItem'
 import LabelItem from '../../common/LabelItem'
 import TextAreaItem from '../../common/TextAreaItem'
-import axios from 'axios'
 export default {
   data () {
     return {
@@ -214,7 +213,7 @@ export default {
       this.hostNews = report.hostNews
       this.awayNews = report.awayNews
     } else {
-    axios.get(`http://localhost:3500/api/betForm/${this.id}/`)
+    this.$axios.get(`/api/betForm/${this.id}/`)
         .then(res => {
           this.$store.dispatch('setReport', {report: res.data.form})
           const report = this.$store.getters.report
@@ -257,7 +256,7 @@ export default {
         hostNews: this.hostNews,
         awayNews: this.awayNews
       }
-      axios.post('http://localhost:3500/api/betForm/', report)
+      this.$axios.post('/api/betForm/', report)
         .then(res => {
           if (res.status === 200) {
             console.log(res)

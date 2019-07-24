@@ -91,6 +91,7 @@ export default {
     loginOut () {
       localStorage.removeItem('user')
       localStorage.removeItem('token')
+      localStorage.removeItem('userId')
       // this.$store.dispatch('setLogin', false)
       // this.$store.commit('setLogin', false)
       this.$store.dispatch('setLogin', {isLogin: false})

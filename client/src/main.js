@@ -5,9 +5,11 @@ import App from './App'
 import VueRouter from 'vue-router'
 import { routes } from './routes'
 import {store} from './store/store'
+import axios from './httpConfig/http'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.prototype.$axios = axios
 
 const router = new VueRouter({
   routes,

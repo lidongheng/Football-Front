@@ -43,7 +43,6 @@
 import NewsItem from '../../common/NewsItem'
 import InputGroup from '../../common/InputGroup'
 import LabelItem from '../../common/LabelItem'
-import axios from 'axios'
 import { formatDate } from '../../../utils/formatDate'
 export default {
   data () {
@@ -65,7 +64,7 @@ export default {
       this.$router.push({path: `/report/add/AsiaOdd/${id}`})
     },
     getMatchList () {
-      axios.get('http://localhost:3500/api/betForm/match')
+      this.$axios.get('/api/betForm/match')
         .then(res => {
           if (res.status === 200) {
             res.data.match.map(item => {

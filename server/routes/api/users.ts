@@ -24,7 +24,7 @@ usersRouter.post('/register', (req, res) => {
         });
 });
 
-// $route POST api/users/register
+// $route POST api/users/login
 // @desc 返回token jwt passport
 // @access public
 usersRouter.post('/login', (req, res) => {

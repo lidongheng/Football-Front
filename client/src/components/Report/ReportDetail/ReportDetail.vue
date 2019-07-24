@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data () {
     return {
@@ -48,7 +47,7 @@ export default {
   },
   created () {
     this.id = this.$route.params.id
-    axios.get(`http://localhost:3500/api/betForm/${this.id}/`)
+    this.$axios.get(`/api/betForm/${this.id}/`)
       .then(res => {
         if (res.status === 200) {
           console.log(res.data.form)

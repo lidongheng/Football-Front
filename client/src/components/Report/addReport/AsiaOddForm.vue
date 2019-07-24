@@ -18,7 +18,7 @@
         </div>
         <div class="col-md-2">
           <button type="submit" class="btn btn-info btn-sm">增加</button>
-          <button type="button" class="btn btn-danger btn-sm" @click="goback">取消</button>
+          <button type="button" class="btn btn-danger btn-sm" @click="goBack">取消</button>
         </div>
       </div>
     </form>
@@ -28,7 +28,6 @@
 <script>
 import InputGroup from '../../../common/InputGroup'
 import LabelItem from '../../../common/LabelItem'
-import axios from 'axios'
 export default {
   data () {
     return {
@@ -57,11 +56,11 @@ export default {
         AsiaCompanyId: this.AsiaCompanyId,
         Asiaodd: this.Asiaodd
       }
-      axios.post('http://localhost:3500/api/odds/AsiaOdds', formData)
+      this.$axios.post('/api/odds/AsiaOdds', formData)
         .then(res => console.log(res))
         .catch(err => console.log(err))
     },
-    goback () {
+    goBack () {
       this.$router.go(-1)
     }
   },

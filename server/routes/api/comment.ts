@@ -18,3 +18,17 @@ commentRouter.get('/', (req, res) => {
 commentRouter.post('/', passport.authenticate("jwt",{session:false}), (req, res) => {
     comment.add(req, res);
 });
+
+// $route POST api/comment/like/:id/
+// @desc 点赞接口
+// @access private
+commentRouter.post('/like/:id/', passport.authenticate("jwt",{session:false}), (req, res) => {
+    comment.like(req, res);
+});
+
+// $route POST api/comment/unlike/:id/
+// @desc 取消点赞接口
+// @access private
+commentRouter.post('/unlike/:id/', passport.authenticate("jwt",{session:false}), (req, res) => {
+    comment.unlike(req, res);
+});
