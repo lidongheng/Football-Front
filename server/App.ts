@@ -4,8 +4,7 @@ import {usersRouter} from "./routes/api/users";
 import {betFormRouter} from "./routes/api/betForm";
 import {oddsRouter} from "./routes/api/odds";
 import {commentRouter} from "./routes/api/comment";
-import mongoose from 'mongoose';
-import db from './config/db';
+import mongoose from './db/db';
 import path from "path";
 import passport from 'passport';
 import { PassportConfig } from './config/passport';
@@ -24,10 +23,7 @@ class App {
      * database connection
      */
     private database(): void {
-        mongoose
-            .connect(db, { useNewUrlParser: true })
-            .then(() => console.log('MongoDB Connected'))
-            .catch(err => console.log(err));
+        mongoose;
     };
 
     /**

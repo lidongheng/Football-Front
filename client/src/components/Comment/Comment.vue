@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="pages">
-            <!-- 分页区 -->
+            <app-pagination :pagination="pagination" :pageNumChange="pageNumChange"></app-pagination>
           </div>
         </div>
       </div>
@@ -48,11 +48,16 @@
 
 <script>
 import {formatDate} from '../../../utils/formatDate'
+import pagination from '../../common/Pagination'
 export default {
   data () {
     return {
       text: '',
-      contents: []
+      pagination: {
+        total: 22,
+        pageSize: 5,
+        pageNum: 1
+      }
     }
   },
   created () {
@@ -60,17 +65,23 @@ export default {
   },
   computed: {
     contentsLength () {
-      return this.contents.length
+      return this.$store.getters.contents.length
+    },
+    contents () {
+      return this.$store.getters.contents
     }
   },
   methods: {
     getData () {
-      this.$axios.get('/api/comment/')
+      const pageNow = this.$route.params.pageNow || 1
+      this.$axios.get(`/api/comment/${pageNow}/`)
         .then(res => {
           if (res.status === 200) {
             if (res.data.length !== 0) {
               console.log(res)
-              this.contents = res.data
+              this.$store.dispatch('setContents', {contents: res.data.contents})
+              this.pagination.total = res.data.rows
+              this.pagination.pageNum = pageNow
             }
           }
         })
@@ -80,15 +91,10 @@ export default {
       const formData = {
         content: this.text
       }
-      this.$axios.post('/api/comment', formData)
+      this.$axios.post('/api/comment/', formData)
         .then(res => {
           if (res.status === 200) {
-            this.contents.unshift({
-              content: res.data.comment.content,
-              date: res.data.comment.date,
-              likes: res.data.comment.likes,
-              id: res.data.comment._id
-            })
+            this.$store.dispatch('addContents', {comment: res.data.comment})
           }
         })
         .catch(err => console.log(err))
@@ -114,7 +120,23 @@ export default {
       this.$axios.delete(`/api/comment/${id}`)
         .then(res => this.getData())
         .catch(err => console.log(err))
+    },
+    pageNumChange (newValue, oldValue) {
+      this.$route.params.pageNow = newValue
+      this.$axios.get(`/api/comment/${newValue}`)
+        .then(res => {
+          if (res.status === 200) {
+            this.$store.dispatch('setContents', {contents: res.data.contents})
+            this.pagination.total = res.data.rows
+            this.pagination.pageNum = newValue
+          }
+          this.$router.push({path: `/comment/${newValue}/`})
+        })
+        .catch(err => console.log(err))
     }
+  },
+  components: {
+    'app-pagination': pagination
   }
 }
 </script>

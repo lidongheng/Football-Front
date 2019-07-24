@@ -34,6 +34,28 @@ class CommentController {
             .catch(err => res.status(404).json({nocontentfound: "找不到任何评论信息"}))
     }
 
+    public async getData (req: Request, res: Response) {
+        const pageNow = req.params.pageNow;
+        const rows = await CommentModel.find().count();
+        const pageSize = 5;
+        let pages = 0;
+        if (rows % pageSize==0) {
+            pages = rows/pageSize;
+        } else {
+            pages = rows/pageSize+1;
+        }
+        const skipNum = (pageNow-1)*pageSize;
+        try {
+            const contents = await CommentModel.find()
+                .skip(skipNum)
+                .sort({date: -1})
+                .limit(pageSize);
+            res.status(200).json({contents, pages, rows});
+        } catch (error) {
+            res.status(404).json({noContentFound: "找不到任何评论信息"});
+        }
+    }
+
     public like (req: Request, res: Response) {
         CommentModel.findById(req.params.id)
             .then(comment => {

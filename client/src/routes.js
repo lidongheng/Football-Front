@@ -30,6 +30,7 @@ export const routes = [
   {path: '/ChineseSuperLeague', component: ChineseSuperLeague},
   {path: '/premierLeague', component: PremierLeague},
   {path: '/temp', component: Temp},
+  {path: '/comment/:pageNow/', component: Comment},
   {path: '/comment', component: Comment},
   {path: '/report/add/fundamental', name: 'fundamentalLink', component: FundamentalForm},
   {path: '/report/add/AsiaOdd/:id/', name: 'AsiaOddLink', component: AsiaOddForm},

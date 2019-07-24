@@ -1,6 +1,4 @@
-// @ts-ignore
-import mongoose from 'mongoose';
-// @ts-ignore
+import mongoose from '../db/db';
 const Schema = mongoose.Schema;
 
 export const CompanySchema = new Schema({

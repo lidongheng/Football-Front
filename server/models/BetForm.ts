@@ -1,5 +1,4 @@
-// @ts-ignore
-import mongoose from 'mongoose';
+import mongoose from '../db/db';
 mongoose.set('useFindAndModify', false)
 
 // @ts-ignore
@@ -72,7 +71,7 @@ export const BetFormSchema = new Schema({
     },
     date:{
         type:Date,
-        default:Date.now()
+        default:Date.now
     }
 
 });

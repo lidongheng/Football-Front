@@ -12,6 +12,17 @@ commentRouter.get('/', (req, res) => {
     comment.getAll(req, res);
 });
 
+// $route GET api/comment/:pageNow/
+// @desc 返回的请求的json数据
+// @access public
+commentRouter.get('/:pageNow/', (req, res) => {
+    comment.getData(req, res)
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({message: '获取评论记录出错!'});
+        })
+});
+
 // $route POST api/comment
 // @desc 返回的请求的json数据
 // @access private

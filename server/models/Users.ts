@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from '../db/db';
 const Schema = mongoose.Schema;
 
 export const UserSchema = new Schema({
@@ -16,7 +16,7 @@ export const UserSchema = new Schema({
     },
     date:{
         type:Date,
-        default:Date.now()
+        default:Date.now
     }
 
 });
