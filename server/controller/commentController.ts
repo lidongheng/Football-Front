@@ -72,6 +72,21 @@ class CommentController {
             .catch(err => res.status(404).json({message:"取消点赞错误"}))
     }
 
+    public delete (req: Request, res: Response) {
+        CommentModel.findById(req.params.id)
+            .then(comment => {
+                // @ts-ignore
+                if(comment.user.toString() !== req.user.id){
+                    return res.status(401).json({notAuthorized:"用户非法操作!"})
+                }
+                // @ts-ignore
+                comment.remove().then(() => res.json({success:true}))
+            })
+            .catch(err => {
+                res.status(404).json({commentNotFound:"没有该评论信息"})
+            })
+    }
+
 }
 
 export default CommentController;

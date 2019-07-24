@@ -1,3 +1,3 @@
-const apiUrl = 'http://localhost:3500';
+const apiUrl = 'http://localhost:3500'
 
-export default apiUrl;
+export default apiUrl

@@ -213,7 +213,7 @@ export default {
       this.hostNews = report.hostNews
       this.awayNews = report.awayNews
     } else {
-    this.$axios.get(`/api/betForm/${this.id}/`)
+      this.$axios.get(`/api/betForm/${this.id}/`)
         .then(res => {
           this.$store.dispatch('setReport', {report: res.data.form})
           const report = this.$store.getters.report

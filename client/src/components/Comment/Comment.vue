@@ -19,7 +19,7 @@
             <!-- 评论区 -->
             <div class="noContent" v-show="contentsLength===0">暂无留言</div>
             <div class="commentList" >
-              <div class="message" v-for="item in contents" :v-key="item._id">
+              <div class="message" v-for="item in contents" :key="item._id">
                 <p class="messageContent">{{item.content}}</p>
                 <p class="operation">
                   <span class="time">{{time(item.date)}}</span>
@@ -31,7 +31,7 @@
                     <a href="#" class="unlike" @click="onUnlikeClick(item._id)">
                       <i class="fas fa-thumbs-down text-secondary"></i>
                     </a>
-                    <a href="#" class="cut">删除</a>
+                    <a href="#" class="cut" @click="onDelete(item._id)">删除</a>
                   </span>
                 </p>
               </div>
@@ -109,6 +109,11 @@ export default {
     findUserLike (likes) {
       let userId = localStorage.getItem('userId')
       return likes.filter(like => like.user === userId).length > 0
+    },
+    onDelete (id) {
+      this.$axios.delete(`/api/comment/${id}`)
+        .then(res => this.getData())
+        .catch(err => console.log(err))
     }
   }
 }

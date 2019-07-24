@@ -32,3 +32,10 @@ commentRouter.post('/like/:id/', passport.authenticate("jwt",{session:false}), (
 commentRouter.post('/unlike/:id/', passport.authenticate("jwt",{session:false}), (req, res) => {
     comment.unlike(req, res);
 });
+
+// $route DELETE api/comment/:id/
+// @desc 删除评论接口
+// @access private
+commentRouter.delete('/:id/', passport.authenticate("jwt",{session:false}), (req, res) => {
+    comment.delete(req, res);
+})
