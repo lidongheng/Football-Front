@@ -1,6 +1,6 @@
+
 import mongoose from '../db/db';
 const Schema = mongoose.Schema;
-
 export const UserSchema = new Schema({
     username:{
         type:String,

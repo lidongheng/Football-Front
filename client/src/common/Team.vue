@@ -24,6 +24,9 @@
           </tr>
           </thead>
           <tbody>
+          <tr v-show="FW.length === 0">
+            <td colspan="5" align="center">暂无数据</td>
+          </tr>
           <tr v-for="(item,index) in FW" :key="'a'+index">
             <th scope="row">{{index+1}}</th>
             <td>{{item.player}}</td>
@@ -44,6 +47,9 @@
           </tr>
           </thead>
           <tbody>
+          <tr v-show="MF.length === 0">
+            <td colspan="5" align="center">暂无数据</td>
+          </tr>
           <tr v-for="(item,index) in MF" :key="'b'+index">
             <th scope="row">{{index+1}}</th>
             <td>{{item.player}}</td>
@@ -64,6 +70,9 @@
           </tr>
           </thead>
           <tbody>
+          <tr v-show="DF.length === 0">
+            <td colspan="5" align="center">暂无数据</td>
+          </tr>
           <tr v-for="(item,index) in DF" :key="'c'+index">
             <th scope="row">{{index+1}}</th>
             <td>{{item.player}}</td>
@@ -84,6 +93,9 @@
           </tr>
           </thead>
           <tbody>
+          <tr v-show="GK.length === 0">
+            <td colspan="5" align="center">暂无数据</td>
+          </tr>
           <tr v-for="(item,index) in GK" :key="'d'+index">
             <th scope="row">{{index+1}}</th>
             <td>{{item.player}}</td>
@@ -99,29 +111,40 @@
 </template>
 
 <script>
-
 export default {
   data () {
     return {
-      players: [],
-      FW: [],
-      MF: [],
-      DF: []
+      team: ''
     }
   },
   created () {
     this.getData()
   },
+  computed: {
+    FW () {
+      return this.$store.getters.FW
+    },
+    MF () {
+      return this.$store.getters.MF
+    },
+    DF () {
+      return this.$store.getters.DF
+    },
+    GK () {
+      return this.$store.getters.GK
+    }
+  },
   methods: {
     getData () {
-      this.$axios.get('/api/players/Arsenal/')
+      this.team = this.$route.params.team
+      this.$axios.get(`/api/players/${this.team}/`)
         .then(res => {
           console.log(res)
-          this.players = res.data.players
-          this.FW = res.data.players.filter(player => player.attr.toString() === 'FW')
-          this.MF = res.data.players.filter(player => player.attr.toString() === 'MF')
-          this.DF = res.data.players.filter(player => player.attr.toString() === 'DF')
-          this.GK = res.data.players.filter(player => player.attr.toString() === 'GK')
+          const FW = res.data.players.filter(player => player.attr.toString() === 'FW')
+          const MF = res.data.players.filter(player => player.attr.toString() === 'MF')
+          const DF = res.data.players.filter(player => player.attr.toString() === 'DF')
+          const GK = res.data.players.filter(player => player.attr.toString() === 'GK')
+          this.$store.dispatch('setPlayers', {FW: FW, MF: MF, DF: DF, GK: GK})
         })
         .catch(err => console.log(err))
     }

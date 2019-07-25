@@ -21,6 +21,9 @@ import Other from './components/Report/ReportDetail/Other'
 import RecentMatch from './components/Report/ReportDetail/RecentMatch'
 import Style from './components/Report/ReportDetail/Style'
 
+import PIndex from './components/PremierLeague/PIndex'
+import Team from './common/Team'
+
 export const routes = [
   {path: '/', redirect: '/home'},
   {path: '/home', name: 'homeLink', component: Home},
@@ -28,7 +31,6 @@ export const routes = [
   {path: '/register', component: Register},
   {path: '/timeline', component: TimeLine},
   {path: '/ChineseSuperLeague', component: ChineseSuperLeague},
-  {path: '/premierLeague', component: PremierLeague},
   {path: '/temp', component: Temp},
   {path: '/comment/:pageNow/', component: Comment},
   {path: '/comment', component: Comment},
@@ -37,6 +39,13 @@ export const routes = [
   {path: '/report/add/EuroOdd/:id/', name: 'EuroOddLink', component: EuroOddForm},
   {path: '/report', name: 'reportLink', component: Report},
   {path: '/report/edit/:id/', component: EditReport},
+  {path: '/premierLeague',
+    component: PremierLeague,
+    redirect: '/premierLeague/index/',
+    children: [
+      {path: '/premierLeague/index/', component: PIndex},
+      {path: '/premierLeague/:team/', name: 'Team', component: Team}
+    ]},
   {path: '/report/:id/',
     name: 'reportDetailLink',
     component: ReportDetail,

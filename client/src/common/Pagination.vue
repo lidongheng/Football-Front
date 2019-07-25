@@ -1,5 +1,5 @@
 <template>
-  <div id="pagination" class="row justify-content-center">
+  <div id="pagination" class="row justify-content-center mt-4">
     <div class="col-auto">
       <ul v-if="pagination.total>pagination.pageSize" class="pagination">
         <li class="page-item">
@@ -63,14 +63,14 @@ export default {
     }
   },
   watch: {
-    'pagination.pageNum'(newValue, oldValue) {
+    'pagination.pageNum' (newValue, oldValue) {
       console.log(newValue, oldValue)
       this.pageNumChange(newValue, oldValue)
     }
   },
   methods: {
     paginationItemActive (i) {
-      if (i == this.pagination.pageNum) {
+      if (i === parseInt(this.pagination.pageNum)) {
         return 'page-item active'
       } else {
         return 'page-item'
