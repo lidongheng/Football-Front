@@ -3,10 +3,8 @@ const Schema = mongoose.Schema;
 
 export const PlayerSchema = new Schema({
     league:{
-        type:String,
-        required:true
+        type:String
     },
-
     club:{
         type:String,
         required:true
