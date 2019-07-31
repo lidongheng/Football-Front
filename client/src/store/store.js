@@ -5,6 +5,7 @@ import status from './module/status'
 import comment from './module/comment'
 import premierLeague from './module/premierLeague'
 import reportDetail from './module/reportDetail'
+import articleDetail from './module/articleDetail'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export const store = new Vuex.Store({
     status,
     reportDetail,
     comment,
-    premierLeague
+    premierLeague,
+    articleDetail
   }
 })

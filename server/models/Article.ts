@@ -18,15 +18,10 @@ export const ArticleSchema = new Schema({
         type:String,
         default:"资讯"
     },
-    about: [
-        {
-            team:{
-                type:Schema.Types.ObjectId,
-                ref:"teams",
-                required:true
-            }
-        }
-    ],
+    about: {
+        type:Array,
+        required:true
+    },
     date:{
         type:Date,
         default:Date.now

@@ -59,11 +59,10 @@ export default {
   methods: {
     onSubmit () {
       this.about = this.about.replace(/，/g, ',')
-      let teams = this.about.split(',').join('')
       const formData = {
         title: this.title,
         content: this.content,
-        about: teams
+        about: this.about
       }
       this.$axios.post('/api/articles/', formData)
         .then(res => {

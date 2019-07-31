@@ -23,6 +23,11 @@
         <p>{{article.content}}</p>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-danger" @click="edit(article._id)">修改</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -30,21 +35,29 @@
 export default {
   data () {
     return {
-      article: {}
+
     }
   },
   created () {
     this.getData()
   },
+  computed: {
+    article () {
+      return this.$store.getters.article
+    }
+  },
   methods: {
     getData () {
       const id = this.$route.params.id
-      this.$axios.get(`/api/articles/${id}`)
+      this.$axios.get(`/api/articles/${id}/`)
         .then(res => {
           console.log(res)
-          this.article = res.data.article
+          this.$store.dispatch('setArticle', {article: res.data.article})
         })
         .catch(err => console.log(err))
+    },
+    edit (id) {
+      this.$router.push({path: `/article/edit/${id}/`})
     }
   }
 }

@@ -40,7 +40,7 @@ export const routes = [
   {path: '/temp', component: Temp},
   {path: '/article', name: 'Article', component: Article},
   {path: '/article/add', name: 'addArticle', component: AddArticle},
-  {path: '/article/edit', name: 'editArticle', component: EditArticle},
+  {path: '/article/edit/:id/', name: 'editArticle', component: EditArticle},
   {path: '/article/:id/', name: 'ArticleDetail', component: ArticleDetail},
   {path: '/comment/:pageNow/', component: Comment},
   {path: '/comment', component: Comment},
