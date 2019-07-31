@@ -1,10 +1,14 @@
 import {Request, Response} from 'express';
 import { BetFormModel } from '../models/BetForm';
 import {BetForm} from "../interface/betForm";
+import {Validator} from "../validation/validator";
 
 class BetFormController {
     public async createOrEdit(req: Request, res: Response) {
-        console.log(req)
+        const {errors, isValid } = Validator.betFormInput(req.body);
+        if(!isValid){
+            return res.status(400).json(errors);
+        }
         const newBetForm:BetForm = {
             user: req.user.id,
             league: req.body.league,

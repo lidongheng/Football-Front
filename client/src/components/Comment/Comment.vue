@@ -4,7 +4,8 @@
       <div class="col-md-8">
         <div class="editComment">
           <div>
-            <textarea class="form-control" name="" id="" cols="20" rows="5" v-model="text"></textarea>
+            <textAreaItem rows="5" cols="20" name="" :error="errors.content" v-model="text"/>
+            <div class="invalid-feedback d-block">{{errors.content}}</div>
           </div>
           <div class="commit">
             <button type="button" class="btn btn-info btn-lg" @click="add">提交评论</button>
@@ -47,8 +48,9 @@
 </template>
 
 <script>
-import {formatDate} from '../../../utils/formatDate'
+import {formatDatetime} from '../../../utils/formatDate'
 import pagination from '../../common/Pagination'
+import TextAreaItem from '../../common/TextAreaItem'
 export default {
   data () {
     return {
@@ -57,7 +59,8 @@ export default {
         total: 22,
         pageSize: 5,
         pageNum: 1
-      }
+      },
+      errors: {}
     }
   },
   created () {
@@ -97,10 +100,14 @@ export default {
             this.$store.dispatch('addContents', {comment: res.data.comment})
           }
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          if (err.response.status === 400) {
+            this.errors = err.response.data
+          }
+        })
     },
     time (date) {
-      return formatDate(date)
+      return formatDatetime(date)
     },
     onLikeClick (id) {
       this.$axios.post(`/api/comment/like/${id}/`)
@@ -136,7 +143,8 @@ export default {
     }
   },
   components: {
-    'app-pagination': pagination
+    'app-pagination': pagination,
+    TextAreaItem
   }
 }
 </script>

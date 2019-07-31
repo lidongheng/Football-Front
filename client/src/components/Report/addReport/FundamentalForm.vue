@@ -8,13 +8,6 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
-          <div class="progress mb-4">
-            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
         <div class="col-md-2">
           <LabelItem textName="联盟："/>
         </div>
@@ -74,7 +67,7 @@
           <div class="form-check">
             <input class="form-check-input" type="radio" name="isSingleMatch" id="isSingleMatch2"
                    v-model="isSingleMatch" value="0">
-            <label class="form-check-label" for="isSingleMatch2">
+            <label class="form-check-label" for="isSingleMatch2" >
               否
             </label>
           </div>
@@ -85,7 +78,7 @@
           <LabelItem textName="战意分析："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="6" name="analysis" v-model="analysis"/>
+          <textAreaItem rows="6" cols="30" name="analysis" :error="errors.analysis" v-model="analysis"/>
           <div class="invalid-feedback d-block">{{errors.analysis}}</div>
         </div>
       </div>
@@ -114,7 +107,7 @@
           <LabelItem textName="主队预测首发："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="3" name="hostExpectLineup"
+          <textAreaItem rows="3" cols="30" name="hostExpectLineup" :error="errors.hostExpectLineup"
                         placeholder="如：莱诺/穆斯塔菲，帕帕斯塔索普洛斯，蒙雷亚尔/科拉希纳茨，扎卡，托雷拉，奈尔斯/厄齐尔，奥巴梅杨，拉卡泽特"
                         v-model="hostExpectLineup"/>
           <div class="invalid-feedback d-block">{{errors.hostExpectLineup}}</div>
@@ -125,7 +118,8 @@
           <LabelItem textName="主队预测替补："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="3" name="hostExpectLBench" placeholder="如：莱诺，穆斯塔菲，帕帕斯塔索普洛斯，科拉希纳茨，扎卡，奥巴梅杨，拉卡泽特"
+          <textAreaItem rows="3" cols="30" name="hostExpectLBench" :error="errors.hostExpectBench"
+                        placeholder="如：莱诺，穆斯塔菲，帕帕斯塔索普洛斯，科拉希纳茨，扎卡，奥巴梅杨，拉卡泽特"
                         v-model="hostExpectBench"/>
           <div class="invalid-feedback d-block">{{errors.hostExpectBench}}</div>
         </div>
@@ -135,7 +129,7 @@
           <LabelItem textName="客队预测首发："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="3" name="awayExpectLineup"
+          <textAreaItem rows="3" cols="30" name="awayExpectLineup" :error="errors.awayExpectLineup"
                         placeholder="如：莱诺/穆斯塔菲，帕帕斯塔索普洛斯，蒙雷亚尔/科拉希纳茨，扎卡，托雷拉，奈尔斯/厄齐尔，奥巴梅杨，拉卡泽特"
                         v-model="awayExpectLineup"/>
           <div class="invalid-feedback d-block">{{errors.awayExpectLineup}}</div>
@@ -146,7 +140,8 @@
           <LabelItem textName="客队预测替补："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="3" name="awayExpectBench" placeholder="如：莱诺，穆斯塔菲，帕帕斯塔索普洛斯，科拉希纳茨，扎卡，奥巴梅杨，拉卡泽特"
+          <textAreaItem rows="3" cols="30" name="awayExpectBench" :error="errors.awayExpectBench"
+                        placeholder="如：莱诺，穆斯塔菲，帕帕斯塔索普洛斯，科拉希纳茨，扎卡，奥巴梅杨，拉卡泽特"
                         v-model="awayExpectBench"/>
           <div class="invalid-feedback d-block">{{errors.awayExpectBench}}</div>
         </div>
@@ -156,7 +151,7 @@
           <LabelItem textName="主队最近新闻："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="6" name="hostNews" v-model="hostNews"/>
+          <textAreaItem rows="6" cols="30" name="hostNews" :error="errors.hostNews" v-model="hostNews"/>
           <div class="invalid-feedback d-block">{{errors.hostNews}}</div>
         </div>
       </div>
@@ -165,11 +160,15 @@
           <LabelItem textName="客队最近新闻："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="6" name="awayNews" v-model="awayNews"/>
+          <textAreaItem rows="6" cols="30" name="awayNews" :error="errors.awayNews" v-model="awayNews"/>
           <div class="invalid-feedback d-block">{{errors.awayNews}}</div>
         </div>
       </div>
-      <button type="submit" class="btn btn-info btn-block">提交</button>
+      <div class="row">
+        <div class="col-md-12 mb-5">
+          <button type="submit" class="btn btn-info btn-block">提交</button>
+        </div>
+      </div>
     </form>
   </div>
 </template>
@@ -181,13 +180,12 @@ import TextAreaItem from '../../../common/TextAreaItem'
 export default {
   data () {
     return {
-
       league: '',
       rounds: '',
       host: '',
       away: '',
       matchTime: '',
-      isSingleMatch: '',
+      isSingleMatch: '0',
       analysis: '',
       hostInjury: '',
       awayInjury: '',
@@ -225,7 +223,9 @@ export default {
           this.$router.push({name: 'reportLink'})
         })
         .catch(err => {
-          console.log(err)
+          if (err.response.status === 400) {
+            this.errors = err.response.data
+          }
         })
     }
   },

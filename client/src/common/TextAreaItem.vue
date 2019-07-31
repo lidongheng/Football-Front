@@ -1,13 +1,13 @@
 <template>
   <div class="form-group">
-    <textarea class="form-control" :name="name" cols="30" :rows="rows" :placeholder="placeholder"
+    <textarea v-bind:class="{'form-control':true,'is-invalid': error}" :name="name" :cols="cols" :rows="rows" :placeholder="placeholder"
               ref="input" :value="value" v-on:input="updateValue($event.target.value)"></textarea>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['rows', 'name', 'placeholder', 'value'],
+  props: ['rows', 'name', 'placeholder', 'error', 'value', 'cols'],
   methods: {
     updateValue (val) {
       this.$emit('input', val)

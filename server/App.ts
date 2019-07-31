@@ -6,6 +6,7 @@ import {oddsRouter} from "./routes/api/odds";
 import {commentRouter} from "./routes/api/comment";
 import {playersRouter} from "./routes/api/players";
 import {teamsRouter} from "./routes/api/teams";
+import {articlesRouter} from "./routes/api/articles";
 import mongoose from './db/db';
 import path from "path";
 import passport from 'passport';
@@ -60,6 +61,7 @@ class App {
         this.app.use('/api/comment', commentRouter);
         this.app.use('/api/players', playersRouter);
         this.app.use('/api/teams', teamsRouter);
+        this.app.use('/api/articles', articlesRouter);
         this.app.use('/', (req, res) => {
             res.status(200).send({ message: `node-api is working!`});
         });

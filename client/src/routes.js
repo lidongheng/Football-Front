@@ -12,6 +12,11 @@ import AsiaOddForm from './components/Report/addReport/AsiaOddForm'
 import EuroOddForm from './components/Report/addReport/EuroOddForm'
 import EditReport from './components/Report/EditReport'
 import Comment from './components/Comment/Comment'
+import Article from './components/Article/Article'
+import AddArticle from './components/Article/AddArticle'
+import EditArticle from './components/Article/EditArticle'
+import ArticleDetail from './components/Article/ArticleDetail'
+import About from './components/About/About'
 
 import Intention from './components/Report/ReportDetail/Intention'
 import Lineup from './components/Report/ReportDetail/Lineup'
@@ -27,11 +32,16 @@ import Team from './common/Team'
 export const routes = [
   {path: '/', redirect: '/home'},
   {path: '/home', name: 'homeLink', component: Home},
+  {path: '/about', name: 'About', component: About},
   {path: '/login', name: 'loginLink', component: Login},
   {path: '/register', component: Register},
   {path: '/timeline', component: TimeLine},
   {path: '/ChineseSuperLeague', component: ChineseSuperLeague},
   {path: '/temp', component: Temp},
+  {path: '/article', name: 'Article', component: Article},
+  {path: '/article/add', name: 'addArticle', component: AddArticle},
+  {path: '/article/edit', name: 'editArticle', component: EditArticle},
+  {path: '/article/:id/', name: 'ArticleDetail', component: ArticleDetail},
   {path: '/comment/:pageNow/', component: Comment},
   {path: '/comment', component: Comment},
   {path: '/report/add/fundamental', name: 'fundamentalLink', component: FundamentalForm},

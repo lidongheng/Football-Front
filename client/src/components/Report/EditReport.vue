@@ -78,7 +78,7 @@
           <LabelItem textName="战意分析："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="6" name="analysis" v-model="analysis"/>
+          <textAreaItem rows="6" cols="30" name="analysis" :error="errors.analysis" v-model="analysis"/>
           <div class="invalid-feedback d-block">{{errors.analysis}}</div>
         </div>
       </div>
@@ -87,7 +87,8 @@
           <LabelItem textName="主队伤停信息："/>
         </div>
         <div class="col-md-10">
-          <InputItem inputType="text" textName="hostInjury" placeholder="如：奥巴梅杨,拉卡泽特" :error="errors.hostInjury"
+          <InputItem inputType="text" textName="hostInjury"
+                     placeholder="如：奥巴梅杨,拉卡泽特" :error="errors.hostInjury"
                      v-model="hostInjury"/>
           <div class="invalid-feedback d-block">{{errors.hostInjury}}</div>
         </div>
@@ -97,7 +98,8 @@
           <LabelItem textName="客队伤停信息："/>
         </div>
         <div class="col-md-10">
-          <InputItem inputType="text" textName="awayInjury" placeholder="如：哈里凯恩,埃里克森" :error="errors.awayInjury"
+          <InputItem inputType="text" textName="awayInjury"
+                     placeholder="如：哈里凯恩,埃里克森" :error="errors.awayInjury"
                      v-model="awayInjury"/>
           <div class="invalid-feedback d-block">{{errors.awayInjury}}</div>
         </div>
@@ -107,7 +109,7 @@
           <LabelItem textName="主队预测首发："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="3" name="hostExpectLineup"
+          <textAreaItem rows="3" cols="30" name="hostExpectLineup" :error="errors.hostExpectLineup"
                         placeholder="如：莱诺/穆斯塔菲，帕帕斯塔索普洛斯，蒙雷亚尔/科拉希纳茨，扎卡，托雷拉，奈尔斯/厄齐尔，奥巴梅杨，拉卡泽特"
                         v-model="hostExpectLineup"/>
           <div class="invalid-feedback d-block">{{errors.hostExpectLineup}}</div>
@@ -118,7 +120,8 @@
           <LabelItem textName="主队预测替补："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="3" name="hostExpectLBench" placeholder="如：莱诺，穆斯塔菲，帕帕斯塔索普洛斯，科拉希纳茨，扎卡，奥巴梅杨，拉卡泽特"
+          <textAreaItem rows="3" cols="30" name="hostExpectLBench" :error="errors.hostExpectBench"
+                        placeholder="如：莱诺，穆斯塔菲，帕帕斯塔索普洛斯，科拉希纳茨，扎卡，奥巴梅杨，拉卡泽特"
                         v-model="hostExpectBench"/>
           <div class="invalid-feedback d-block">{{errors.hostExpectBench}}</div>
         </div>
@@ -128,7 +131,7 @@
           <LabelItem textName="客队预测首发："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="3" name="awayExpectLineup"
+          <textAreaItem rows="3" cols="30" name="awayExpectLineup" :error="errors.awayExpectLineup"
                         placeholder="如：莱诺/穆斯塔菲，帕帕斯塔索普洛斯，蒙雷亚尔/科拉希纳茨，扎卡，托雷拉，奈尔斯/厄齐尔，奥巴梅杨，拉卡泽特"
                         v-model="awayExpectLineup"/>
           <div class="invalid-feedback d-block">{{errors.awayExpectLineup}}</div>
@@ -139,7 +142,8 @@
           <LabelItem textName="客队预测替补："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="3" name="awayExpectBench" placeholder="如：莱诺，穆斯塔菲，帕帕斯塔索普洛斯，科拉希纳茨，扎卡，奥巴梅杨，拉卡泽特"
+          <textAreaItem rows="3" cols="30" name="awayExpectBench" :error="errors.awayExpectBench"
+                        placeholder="如：莱诺，穆斯塔菲，帕帕斯塔索普洛斯，科拉希纳茨，扎卡，奥巴梅杨，拉卡泽特"
                         v-model="awayExpectBench"/>
           <div class="invalid-feedback d-block">{{errors.awayExpectBench}}</div>
         </div>
@@ -149,7 +153,7 @@
           <LabelItem textName="主队最近新闻："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="6" name="hostNews" v-model="hostNews"/>
+          <textAreaItem rows="6" cols="30" name="hostNews" :error="errors.hostNews" v-model="hostNews"/>
           <div class="invalid-feedback d-block">{{errors.hostNews}}</div>
         </div>
       </div>
@@ -158,7 +162,7 @@
           <LabelItem textName="客队最近新闻："/>
         </div>
         <div class="col-md-10">
-          <textAreaItem rows="6" name="awayNews" v-model="awayNews"/>
+          <textAreaItem rows="6" cols="30" name="awayNews" :error="errors.awayNews" v-model="awayNews"/>
           <div class="invalid-feedback d-block">{{errors.awayNews}}</div>
         </div>
       </div>

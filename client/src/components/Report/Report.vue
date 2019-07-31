@@ -43,7 +43,7 @@
 import NewsItem from '../../common/NewsItem'
 import InputGroup from '../../common/InputGroup'
 import LabelItem from '../../common/LabelItem'
-import { formatDate } from '../../../utils/formatDate'
+import { formatDatetime } from '../../../utils/formatDate'
 export default {
   data () {
     return {
@@ -68,7 +68,7 @@ export default {
         .then(res => {
           if (res.status === 200) {
             res.data.match.map(item => {
-              item.date = formatDate(item.date)
+              item.date = formatDatetime(item.date)
             })
             this.match = res.data.match
           } else {

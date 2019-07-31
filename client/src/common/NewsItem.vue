@@ -2,7 +2,7 @@
   <div class="news">
     <span class="date">{{time}}</span>
     <span class="tab">{{category}}</span>
-    <router-link tag="a" class="news_title" :to="'/report/'+link">{{newsTitle}}</router-link>
+    <router-link tag="a" class="news_title" :to="link">{{newsTitle}}</router-link>
   </div>
 </template>
 

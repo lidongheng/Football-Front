@@ -14,29 +14,27 @@
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/timeline">时间线</router-link>
         </li>
+        <!--
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/temp">临时</router-link>
         </li>
+        -->
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/premierLeague">英超</router-link>
         </li>
+        <!--
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/ChineseSuperLeague">中超</router-link>
+        </li>
+        -->
+        <li class="nav-item">
+          <router-link tag="a" class="nav-link" to="/article">文章</router-link>
         </li>
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/comment">热评</router-link>
         </li>
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/report">报告</router-link>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-        <li class="nav-item">
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">

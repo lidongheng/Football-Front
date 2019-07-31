@@ -66,7 +66,9 @@ export default {
           // } else {
           //   console.log(err.response)
           // }
-          console.log(err)
+          if (err.response.status === 400) {
+            this.errors = err.response.data
+          }
         })
     }
   },

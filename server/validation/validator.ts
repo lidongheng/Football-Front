@@ -74,6 +74,9 @@ export class Validator {
     public static commentInput (data: any) {
         data.content = !this.isEmpty(data.content) ? data.content : '';
         let errors = {content:""};
+        if (validator.isEmpty(data.content)) {
+            errors.content = '不能提交空白评论!'
+        }
         if(!validator.isLength(data.content,{max:140})) {
             errors.content = '输入字数超过140字！';
         }
@@ -82,6 +85,98 @@ export class Validator {
             // @ts-ignore
             isValid:this.isEmpty(errors)
         };
+    }
+
+    public static articleInput (data: any) {
+        data.title = !this.isEmpty(data.title) ? data.title : '';
+        data.content = !this.isEmpty(data.content) ? data.content : '';
+        data.about = !this.isEmpty(data.about) ? data.about : '';
+        let errors = {title:"",content:"",about:""};
+        if (validator.isEmpty(data.title)) {
+            errors.title = '标题不能为空!'
+        }
+        if (validator.isEmpty(data.content)) {
+            errors.content = '内容不能为空!'
+        }
+        if (validator.isEmpty(data.about)) {
+            errors.about = '关联球队不能为空!'
+        }
+        return {
+            errors,
+            // @ts-ignore
+            isValid:this.isEmpty(errors)
+        };
+    }
+
+    public static betFormInput (data: any) {
+        data.league = !this.isEmpty(data.league) ? data.league : '';
+        data.rounds = !this.isEmpty(data.rounds) ? data.rounds : '';
+        data.host = !this.isEmpty(data.host) ? data.host : '';
+        data.away = !this.isEmpty(data.away) ? data.away : '';
+        data.matchTime = !this.isEmpty(data.matchTime) ? data.matchTime : '';
+        data.isSingleMatch = !this.isEmpty(data.isSingleMatch) ? data.isSingleMatch : '';
+        data.analysis = !this.isEmpty(data.analysis) ? data.analysis : '';
+        data.hostInjury = !this.isEmpty(data.hostInjury) ? data.hostInjury : '';
+        data.awayInjury = !this.isEmpty(data.awayInjury) ? data.awayInjury : '';
+        data.hostExpectLineup = !this.isEmpty(data.hostExpectLineup) ? data.hostExpectLineup : '';
+        data.hostExpectBench = !this.isEmpty(data.hostExpectBench) ? data.hostExpectBench : '';
+        data.awayExpectLineup = !this.isEmpty(data.awayExpectLineup) ? data.awayExpectLineup : '';
+        data.awayExpectBench = !this.isEmpty(data.awayExpectBench) ? data.awayExpectBench : '';
+        data.hostNews = !this.isEmpty(data.hostNews) ? data.hostNews : '';
+        data.awayNews = !this.isEmpty(data.awayNews) ? data.awayNews : '';
+        let errors = {league:"",rounds:"",host:"",away:"",matchTime:"",isSingleMatch:"", analysis:"",
+            hostInjury:"",awayInjury:"",hostExpectLineup:"",hostExpectBench:"",awayExpectLineup:"",
+            awayExpectBench:"",hostNews:"",awayNews:""};
+        if (validator.isEmpty(data.league)) {
+            errors.league = '联赛名不能为空!'
+        }
+        if (validator.isEmpty(data.rounds)) {
+            errors.rounds = '轮次不能为空!'
+        }
+        if (validator.isEmpty(data.host)) {
+            errors.host = '主队不能为空!'
+        }
+        if (validator.isEmpty(data.away)) {
+            errors.away = '客队不能为空!'
+        }if (validator.isEmpty(data.matchTime)) {
+            errors.matchTime = '比赛时间不能为空!'
+        }
+        if (validator.isEmpty(data.isSingleMatch)) {
+            errors.isSingleMatch = '是否竞彩单关不能为空!'
+        }
+        if (validator.isEmpty(data.analysis)) {
+            errors.analysis = '战意不能为空!'
+        }
+        if (validator.isEmpty(data.hostInjury)) {
+            errors.hostInjury = '主队伤病名单不能为空!'
+        }
+        if (validator.isEmpty(data.awayInjury)) {
+            errors.awayInjury = '客队伤病名单不能为空!'
+        }
+        if (validator.isEmpty(data.hostExpectLineup)) {
+            errors.hostExpectLineup = '主队阵容不能为空!'
+        }
+        if (validator.isEmpty(data.hostExpectBench)) {
+            errors.hostExpectBench = '主队替补不能为空!'
+        }
+        if (validator.isEmpty(data.awayExpectLineup)) {
+            errors.awayExpectLineup = '客队阵容不能为空!'
+        }
+        if (validator.isEmpty(data.awayExpectBench)) {
+            errors.awayExpectBench = '客队替补不能为空!'
+        }
+        if (validator.isEmpty(data.hostNews)) {
+            errors.hostNews = '主队新闻不能为空!'
+        }
+        if (validator.isEmpty(data.awayNews)) {
+            errors.awayNews = '客队新闻不能为空!'
+        }
+        return {
+            errors,
+            // @ts-ignore
+            isValid:this.isEmpty(errors)
+        };
+
     }
 
     private static isEmpty (value: any) {
