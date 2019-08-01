@@ -36,4 +36,11 @@ articlesRouter.get('/:id/', (req, res) => {
     article.getArticle(req, res);
 });
 
+// $route DELETE api/articles/:id/
+// @desc 删除文章
+// @access private
+articlesRouter.delete('/:id/', passport.authenticate("jwt",{session:false}), (req, res) => {
+    article.delete(req, res);
+});
+
 

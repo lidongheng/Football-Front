@@ -58,6 +58,16 @@ class ArticleController {
                 return res.status(400).json({err: err});
             })
     }
+
+    public delete (req: Request, res: Response) {
+        ArticleModel.findOneAndDelete({_id: req.params.id})
+            .then(article => {
+                return res.status(200).json({success:true});
+            })
+            .catch(err => {
+                return res.status(400).json({err: err});
+            })
+    }
 }
 
 export default ArticleController;

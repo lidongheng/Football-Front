@@ -44,3 +44,10 @@ betFormRouter.get('/:id/', (req, res) => {
     betForm.getDetail(req, res)
         .catch(err => {console.log(err)});
 });
+
+// $route DELETE api/betForm/:id/
+// @desc 删除一条数据
+// @access private
+betFormRouter.delete('/:id/', passport.authenticate("jwt",{session:false}), (req, res) => {
+    betForm.deleteOne(req, res);
+});

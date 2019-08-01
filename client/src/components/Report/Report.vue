@@ -30,6 +30,7 @@
                 <button type="button" class="btn btn-outline-info btn-sm" @click="addEuroOdd(item._id)">添加欧指</button>
                 <button type="button" class="btn btn-outline-danger btn-sm" @click="addAsiaOdd(item._id)">添加亚指</button>
                 <button type="button" class="btn btn-outline-warning btn-sm" @click="editReport(item._id)">编辑报告</button>
+                <button type="button" class="btn btn-outline-danger btn-sm" @click="deleteOne(item._id)">删除报告</button>
               </td>
             </tr>
           </tbody>
@@ -62,6 +63,15 @@ export default {
     },
     addAsiaOdd (id) {
       this.$router.push({path: `/report/add/AsiaOdd/${id}`})
+    },
+    deleteOne (id) {
+      this.$axios.delete(`/api/betForm/${id}/`)
+        .then(res => {
+          this.getMatchList()
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     getMatchList () {
       this.$axios.get('/api/betForm/match')

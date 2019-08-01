@@ -25,7 +25,8 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <button type="button" class="btn btn-danger" @click="edit(article._id)">修改</button>
+        <button type="button" class="btn btn-warning" @click="edit(article._id)">修改</button>
+        <button type="button" class="btn btn-danger" @click="deleteOne(article._id)">删除</button>
       </div>
     </div>
   </div>
@@ -58,6 +59,16 @@ export default {
     },
     edit (id) {
       this.$router.push({path: `/article/edit/${id}/`})
+    },
+    deleteOne (id) {
+      this.$axios.delete(`/api/articles/${id}/`)
+        .then(res => {
+          this.$store.dispatch('resetArticle', {article: {}})
+          this.$router.push({name: 'Article'})
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

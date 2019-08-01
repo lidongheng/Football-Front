@@ -29,8 +29,8 @@ export const TeamSchema = new Schema({
                 type:String
             },
             isDelete:{
-                type:Boolean,
-                default:false
+                type:Number,
+                default:0
             }
         }
     ]

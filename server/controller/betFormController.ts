@@ -35,10 +35,10 @@ class BetFormController {
                 if (form) {
                     return res.status(200).json({success: true, matchId: req.body.id})
                 } else {
-                    return res.status(408).json({message: '执行更新方法失败！'})
+                    return res.status(408).json({message: '执行更新方法失败！'});
                 }
             } else {
-                return res.status(400).json({message: '找不到该场比赛！'})
+                return res.status(400).json({message: '找不到该场比赛！'});
             }
         }
 
@@ -55,13 +55,23 @@ class BetFormController {
     }
 
     public async getList (req: Request, res: Response) {
-        const match = await BetFormModel.find({}, "_id host away date").populate('user','username _id').exec();
+        const match = await BetFormModel.find({isDelete: 0}, "_id host away date").populate('user','username _id').exec();
         return res.status(200).json({match: match});
     }
 
     public async getDetail (req: Request, res: Response) {
         const form = await BetFormModel.findById(req.params.id);
         return res.status(200).json({form});
+    }
+
+    public deleteOne (req: Request, res: Response) {
+        BetFormModel.updateOne({_id: req.params.id}, {$set: {isDelete: 1}})
+            .then(doc => {
+                return res.status(200).json({success: true});
+            })
+            .catch(err => {
+                return res.status(400).json({err});
+            })
     }
 }
 
