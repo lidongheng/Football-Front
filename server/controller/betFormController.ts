@@ -66,7 +66,7 @@ class BetFormController {
         }
         const skipNum = (pageNow-1)*pageSize;
         try {
-            const match = await BetFormModel.find({isDelete: 0}, "_id host away date").populate('user','username _id')
+            const match = await BetFormModel.find({isDelete: 0}, "_id host away date").populate('user','username email _id')
                 .skip(skipNum)
                 .sort({date: -1})
                 .limit(pageSize)

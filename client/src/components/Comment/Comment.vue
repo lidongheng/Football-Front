@@ -32,7 +32,7 @@
                     <a href="#" class="unlike" @click="onUnlikeClick(item._id)">
                       <i class="fas fa-thumbs-down text-secondary"></i>
                     </a>
-                    <a href="#" class="cut" @click="onDelete(item._id)">删除</a>
+                    <a href="#" class="cut" v-show="canDelete(item.user)" @click="onDelete(item._id)">删除</a>
                   </span>
                 </p>
               </div>
@@ -75,6 +75,9 @@ export default {
     }
   },
   methods: {
+    canDelete (id) {
+      return (localStorage.getItem('userId') && localStorage.getItem('userId') === id)
+    },
     getData () {
       const pageNow = this.$route.params.pageNow || 1
       this.$axios.get(`/api/comment/${pageNow}/`)

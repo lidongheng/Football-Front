@@ -26,7 +26,7 @@
     <div class="row">
       <div class="col-md-12">
         <button type="button" class="btn btn-warning" @click="edit(article._id)">修改</button>
-        <button type="button" class="btn btn-danger" @click="deleteOne(article._id)">删除</button>
+        <button type="button" v-show="canDelete(article.user)" class="btn btn-danger" @click="deleteOne(article._id)">删除</button>
       </div>
     </div>
   </div>
@@ -48,6 +48,9 @@ export default {
     }
   },
   methods: {
+    canDelete (id) {
+      return (localStorage.getItem('userId') && localStorage.getItem('userId') === id)
+    },
     getData () {
       const id = this.$route.params.id
       this.$axios.get(`/api/articles/${id}/`)

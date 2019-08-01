@@ -30,7 +30,7 @@
                 <button type="button" class="btn btn-outline-info btn-sm" @click="addEuroOdd(item._id)">添加欧指</button>
                 <button type="button" class="btn btn-outline-danger btn-sm" @click="addAsiaOdd(item._id)">添加亚指</button>
                 <button type="button" class="btn btn-outline-warning btn-sm" @click="editReport(item._id)">编辑报告</button>
-                <button type="button" class="btn btn-outline-danger btn-sm" @click="deleteOne(item._id)">删除报告</button>
+                <button type="button" v-show="canDelete(item.user._id)" class="btn btn-outline-danger btn-sm" @click="deleteOne(item._id)">删除报告</button>
               </td>
             </tr>
           </tbody>
@@ -62,6 +62,9 @@ export default {
     this.getMatchList()
   },
   methods: {
+    canDelete (id) {
+      return (localStorage.getItem('userId') && localStorage.getItem('userId') === id)
+    },
     addReport () {
       this.$router.push({name: 'fundamentalLink'})
     },
@@ -84,6 +87,7 @@ export default {
       this.$axios.get('/api/betForm/match/1/')
         .then(res => {
           if (res.status === 200) {
+            console.log(res)
             res.data.match.map(item => {
               item.date = formatDatetime(item.date)
             })
