@@ -47,6 +47,7 @@ export const routes = [
   {path: '/report/add/fundamental', name: 'fundamentalLink', component: FundamentalForm},
   {path: '/report/add/AsiaOdd/:id/', name: 'AsiaOddLink', component: AsiaOddForm},
   {path: '/report/add/EuroOdd/:id/', name: 'EuroOddLink', component: EuroOddForm},
+  {path: '/report/:pageNow/', component: Report},
   {path: '/report', name: 'reportLink', component: Report},
   {path: '/report/edit/:id/', component: EditReport},
   {path: '/premierLeague',

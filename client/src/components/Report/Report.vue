@@ -37,6 +37,7 @@
         </table>
       </div>
     </div>
+    <app-pagination :pagination="pagination" :pageNumChange="pageNumChange"></app-pagination>
   </div>
 </template>
 
@@ -44,11 +45,17 @@
 import NewsItem from '../../common/NewsItem'
 import InputGroup from '../../common/InputGroup'
 import LabelItem from '../../common/LabelItem'
+import Pagination from '../../common/Pagination'
 import { formatDatetime } from '../../../utils/formatDate'
 export default {
   data () {
     return {
-      match: []
+      match: [],
+      pagination: {
+        total: 22,
+        pageSize: 10,
+        pageNum: 1
+      },
     }
   },
   created () {
@@ -74,13 +81,15 @@ export default {
         })
     },
     getMatchList () {
-      this.$axios.get('/api/betForm/match')
+      this.$axios.get('/api/betForm/match/1/')
         .then(res => {
           if (res.status === 200) {
             res.data.match.map(item => {
               item.date = formatDatetime(item.date)
             })
             this.match = res.data.match
+            this.pagination.total = res.data.rows
+            this.pagination.pageNum = pageNow
           } else {
             console.log(res)
           }
@@ -91,13 +100,30 @@ export default {
     },
     editReport (id) {
       this.$router.push({path: `/report/edit/${id}/`})
+    },
+    pageNumChange (newValue, oldValue) {
+      this.$route.params.pageNow = newValue
+      this.$axios.get(`/api/betForm/match/${newValue}/`)
+        .then(res => {
+          if (res.status === 200) {
+            res.data.match.map(item => {
+              item.date = formatDatetime(item.date)
+            })
+            this.match = res.data.match
+            this.pagination.total = res.data.rows
+            this.pagination.pageNum = newValue
+          }
+          this.$router.push({path: `/report/${newValue}/`})
+        })
+        .catch(err => console.log(err))
     }
   },
 
   components: {
     NewsItem,
     InputGroup,
-    LabelItem
+    LabelItem,
+    'app-pagination': Pagination
   }
 }
 </script>

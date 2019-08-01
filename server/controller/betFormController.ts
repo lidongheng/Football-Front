@@ -55,8 +55,27 @@ class BetFormController {
     }
 
     public async getList (req: Request, res: Response) {
-        const match = await BetFormModel.find({isDelete: 0}, "_id host away date").populate('user','username _id').exec();
-        return res.status(200).json({match: match});
+        const pageNow = req.params.pageNow;
+        const rows = await BetFormModel.find({isDelete: 0}).count();
+        const pageSize = 10;
+        let pages = 0;
+        if (rows % pageSize==0) {
+            pages = rows/pageSize;
+        } else {
+            pages = rows/pageSize+1;
+        }
+        const skipNum = (pageNow-1)*pageSize;
+        try {
+            const match = await BetFormModel.find({isDelete: 0}, "_id host away date").populate('user','username _id')
+                .skip(skipNum)
+                .sort({date: -1})
+                .limit(pageSize)
+                .exec();
+            return res.status(200).json({match: match, rows: rows, pages: pages});
+        } catch (error) {
+            res.status(400).json({noContentFound: "找不到任何报告！"});
+        }
+
     }
 
     public async getDetail (req: Request, res: Response) {

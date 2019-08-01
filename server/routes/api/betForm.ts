@@ -30,10 +30,11 @@ betFormRouter.post('/', passport.authenticate("jwt",{session:false}), (req, res)
 // $route GET api/betForm/match
 // @desc 返回的请求的json数据
 // @access public
-betFormRouter.get('/match', (req, res) => {
+betFormRouter.get('/match/:pageNow/', (req, res) => {
     betForm.getList(req, res)
         .catch(err => {
             console.log(err);
+            return res.status(500).json({error:'内部服务器出错!'});
         })
 });
 
