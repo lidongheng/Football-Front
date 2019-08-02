@@ -1,130 +1,29 @@
 <template>
   <div class="temp">
-    <div class="row">
-      <div class="col-md-12">
-        <h1 class="text-center my-5">球队风格评述</h1>
-        <p class="text-center">美丽足球，前场双子星火力强劲，但是阵容厚度差，应付不了双线作战，而且后场很坑。</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h1 class="text-center my-5">一线队球员一览</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table">
-          <thead class="thead-dark">
-          <tr>
-            <th scope="col">index</th>
-            <th scope="col">Name</th>
-            <th scope="col">Position</th>
-            <th scope="col">importance && status</th>
-            <th scope="col">description</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="(item,index) in FW" :key="'a'+index">
-            <th scope="row">{{index+1}}</th>
-            <td>{{item.player}}</td>
-            <td>{{item.position}}</td>
-            <td>{{item.importance}}</td>
-            <td>{{item.description}}</td>
-          </tr>
-          </tbody>
-        </table>
-        <table class="table">
-          <thead class="thead-dark">
-          <tr>
-            <th scope="col">index</th>
-            <th scope="col">Name</th>
-            <th scope="col">Position</th>
-            <th scope="col">importance && status</th>
-            <th scope="col">description</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="(item,index) in MF" :key="'b'+index">
-            <th scope="row">{{index+1}}</th>
-            <td>{{item.player}}</td>
-            <td>{{item.position}}</td>
-            <td>{{item.importance}}</td>
-            <td>{{item.description}}</td>
-          </tr>
-          </tbody>
-        </table>
-        <table class="table">
-          <thead class="thead-dark">
-          <tr>
-            <th scope="col">index</th>
-            <th scope="col">Name</th>
-            <th scope="col">Position</th>
-            <th scope="col">importance && status</th>
-            <th scope="col">description</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="(item,index) in DF" :key="'c'+index">
-            <th scope="row">{{index+1}}</th>
-            <td>{{item.player}}</td>
-            <td>{{item.position}}</td>
-            <td>{{item.importance}}</td>
-            <td>{{item.description}}</td>
-          </tr>
-          </tbody>
-        </table>
-        <table class="table">
-          <thead class="thead-dark">
-          <tr>
-            <th scope="col">index</th>
-            <th scope="col">Name</th>
-            <th scope="col">Position</th>
-            <th scope="col">importance && status</th>
-            <th scope="col">description</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="(item,index) in GK" :key="'d'+index">
-            <th scope="row">{{index+1}}</th>
-            <td>{{item.player}}</td>
-            <td>{{item.position}}</td>
-            <td>{{item.importance}}</td>
-            <td>{{item.description}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <button type="button" class="btn" @click="showModal">打开Modal</button>
+    <Modal v-show="isModalVisible" @close="closeModal"></Modal>
   </div>
 </template>
 
 <script>
-
+import Modal from '../../common/Modal'
 export default {
+  name: 'Temp',
   data () {
     return {
-      players: [],
-      FW: [],
-      MF: [],
-      DF: []
+      isModalVisible: false
     }
-  },
-  created () {
-    this.getData()
   },
   methods: {
-    getData () {
-      this.$axios.get('/api/players/Arsenal/')
-        .then(res => {
-          console.log(res)
-          this.players = res.data.players
-          this.FW = res.data.players.filter(player => player.attr.toString() === 'FW')
-          this.MF = res.data.players.filter(player => player.attr.toString() === 'MF')
-          this.DF = res.data.players.filter(player => player.attr.toString() === 'DF')
-          this.GK = res.data.players.filter(player => player.attr.toString() === 'GK')
-        })
-        .catch(err => console.log(err))
+    showModal: function () {
+      this.isModalVisible = true
+    },
+    closeModal: function () {
+      this.isModalVisible = false
     }
+  },
+  components: {
+    Modal
   }
 }
 </script>
@@ -132,3 +31,5 @@ export default {
 <style scoped>
 
 </style>
+
+

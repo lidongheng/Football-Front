@@ -8,7 +8,6 @@ import { Validator } from '../validation/validator';
 
 
 class UserController {
-
     public async register(req: Request, res: Response) {
         console.log(req.body);
         const {errors, isValid } = Validator.registerInput(req.body);

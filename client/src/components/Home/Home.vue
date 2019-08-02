@@ -4,10 +4,10 @@
         <div class="col-md-3">濒临下课主帅名单</div>
         <div class="col-md-6 ml-auto">
           <h1 class="display-4">重要新闻</h1>
-          <NewsItem time="2019-07-10" category="资讯" newsTitle="英超19-20赛季大阅兵之——阿森纳"/>
-          <NewsItem time="2019-07-10" category="资讯" newsTitle="热刺战术分析——阿里和埃里克森在队伍中的作用"/>
-          <NewsItem time="2019-07-10" category="资讯" newsTitle="赛季前瞻——狼队的综合实力配得上他的野心吗？"/>
-          <NewsItem time="2019-07-10" category="资讯" newsTitle="新赛季的输盘王，是阿森纳曼联，还是曼城利物浦？"/>
+          <NewsItem time="2019-07-10" category="资讯" newsTitle="英超19-20赛季大阅兵之——阿森纳" link=".."/>
+          <NewsItem time="2019-07-10" category="资讯" newsTitle="热刺战术分析——阿里和埃里克森在队伍中的作用" link=".."/>
+          <NewsItem time="2019-07-10" category="资讯" newsTitle="赛季前瞻——狼队的综合实力配得上他的野心吗？" link=".."/>
+          <NewsItem time="2019-07-10" category="资讯" newsTitle="新赛季的输盘王，是阿森纳曼联，还是曼城利物浦？" link=".."/>
         </div>
         <div class="col-md-3">稳胆投注比赛列表</div>
       </div>
@@ -55,6 +55,9 @@ import NewsItem from '../../common/NewsItem'
 export default {
   components: {
     NewsItem
+  },
+  created () {
+    alert(window.location.origin)
   }
 }
 </script>

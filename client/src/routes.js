@@ -57,7 +57,7 @@ export const routes = [
       {path: '/premierLeague/index/', component: PIndex},
       {path: '/premierLeague/:team/', name: 'Team', component: Team}
     ]},
-  {path: '/report/:id/',
+  {path: '/reportDetail/:id/',
     name: 'reportDetailLink',
     component: ReportDetail,
     children: [

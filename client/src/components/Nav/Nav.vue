@@ -6,7 +6,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <a href="/" class="navbar-brand">投注管理系统</a>
+      <!--<a href="/" class="navbar-brand">投注管理系统</a>-->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <router-link tag="a" class="nav-link" to="/">首页 <span class="sr-only">(current)</span></router-link>
@@ -14,11 +14,9 @@
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/timeline">时间线</router-link>
         </li>
-        <!--
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/temp">临时</router-link>
         </li>
-        -->
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/premierLeague">英超</router-link>
         </li>
@@ -48,24 +46,9 @@
           <router-link tag="a" class="nav-link" to="/login">登录</router-link>
         </li>
         <li class="nav-item" v-show="isLogin">
-          <!-- <router-link tag="a" class="nav-link" to="/exit">[退出]</router-link>-->
           <span class="nav-link" @click="loginOut">[退出]</span>
         </li>
       </ul>
-      <!--
-      <div v-if="!isAuthenticated" class="register">
-        <router-link to="/register" class="nav-link">注册</router-link>
-      </div>
-      <div v-else class="register">
-        <router-link to="/register" class="nav-link">东恒</router-link>
-      </div>
-      <div v-if="!isAuthenticated" class="login">
-        <router-link tag="a" to="/login" class="nav-link">登录</router-link>
-      </div>
-      <div v-else class="login">
-        <router-link tag="a" to="/login" class="nav-link">注销</router-link>
-      </div>
-      -->
     </div>
   </nav>
 </template>

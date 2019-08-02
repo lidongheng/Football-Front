@@ -25,7 +25,7 @@
             <tr v-for="(item,index) in match" :key="index">
               <td>{{item.date}}</td>
               <td>{{item.user.username}}</td>
-              <td><router-link tag="a" :to="'/report/'+item._id">{{item.host + ' vs ' + item.away}}</router-link></td>
+              <td><router-link tag="a" :to="'/reportDetail/'+item._id+'/'">{{item.host + ' vs ' + item.away}}</router-link></td>
               <td>
                 <button type="button" class="btn btn-outline-info btn-sm" @click="addEuroOdd(item._id)">添加欧指</button>
                 <button type="button" class="btn btn-outline-danger btn-sm" @click="addAsiaOdd(item._id)">添加亚指</button>
