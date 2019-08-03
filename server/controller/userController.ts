@@ -59,6 +59,17 @@ class UserController {
             return res.status(400).json({"message": "密码错误"});
         }
     }
+
+    public async changePwd (req: Request, res: Response) {
+        const saltRounds = 10;
+        req.body.password = await bcrypt.hash(req.body.password, saltRounds);
+        const user = await UserModel.findOneAndUpdate({email:req.body.email}, {$set: {password:req.body.password}}, {new: true})
+        if (user) {
+            res.status(200).json({state:"suc",message:'密码修改成功！'})
+        } else {
+            res.status(400).json({state:"failed",message:'密码修改失败！'})
+        }
+    }
 }
 
 export default UserController;

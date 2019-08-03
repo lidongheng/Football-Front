@@ -5,6 +5,9 @@ export const AdminSchema = new Schema({
         type:String,
         required:true
     },
+    des: {
+        type: String
+    },
     email:{
         type:String,
         required:true
@@ -15,6 +18,16 @@ export const AdminSchema = new Schema({
     },
     role:{
         type:String
+    },
+    key: {
+        type: String,
+        required: true
+    },
+    avatar: {
+        type: String
+    },
+    autoLogin: {
+        type: Boolean
     },
     date:{
         type:Date,

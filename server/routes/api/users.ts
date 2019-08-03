@@ -3,7 +3,6 @@ import { Router } from 'express';
 import UserController from '../../controller/userController';
 import passport from 'passport';
 
-
 export const usersRouter = Router();
 const user = new UserController();
 
@@ -39,4 +38,14 @@ usersRouter.post('/login', (req, res) => {
 // @access private
 usersRouter.get('/current', passport.authenticate("jwt",{session:false}), (req, res) => {
     res.json(req.user);
+});
+
+// $route POST api/users/changePwd
+// @desc 修改密码
+// @access private
+usersRouter.post('/changePwd', passport.authenticate("jwt",{session:false}), (req, res) => {
+    user.changePwd(req, res)
+        .catch(err => {
+            return res.status(500).json(err);
+        })
 });

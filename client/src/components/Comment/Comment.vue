@@ -26,7 +26,7 @@
                   <span class="time">{{time(item.date)}}</span>
                   <span class="handle">
                     <a href="#" class="like" @click="onLikeClick(item._id)">
-                      <i :class="{'fas': true, 'fa-thumbs-up': true, 'text-info': findUserLike(item.likes)}"></i>
+                      <i ref="modify" :class="{'fas': true, 'fa-thumbs-up': true, 'text-info': findUserLike(item.likes)}"></i>
                       <span class="badge badge-light">{{item.likes.length}}</span>
                     </a>
                     <a href="#" class="unlike" @click="onUnlikeClick(item._id)">

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import AdminController from '../../controller/adminController';
+import passport from 'passport';
 
 
 export const adminRouter = Router();
@@ -38,3 +39,13 @@ adminRouter.post('/login', (req, res) => {
 adminRouter.post('/findPwd', (req, res) => {
     admin.findPwd(req, res);
 })
+
+// $route POST api/admin/changePwd
+// @desc 修改密码
+// @access private
+adminRouter.post('/changePwd', passport.authenticate("jwt",{session:false}), (req, res) => {
+    admin.changePwd(req, res)
+        .catch(err => {
+            return res.status(500).json(err);
+        })
+});

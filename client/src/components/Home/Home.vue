@@ -56,9 +56,9 @@ export default {
   components: {
     NewsItem
   },
-  created () {
-    alert(window.location.origin)
-  }
+  // created () {
+  //   alert(window.location.origin)
+  // }
 }
 </script>
 

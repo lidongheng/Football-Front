@@ -11,10 +11,10 @@ require('dotenv').config();
 class AdminController {
     public async register(req: Request, res: Response) {
         console.log(req.body);
-        const {errors, isValid } = Validator.registerInput(req.body);
-        if(!isValid){
-            return res.status(400).json(errors);
-        }
+        // const {errors, isValid } = Validator.registerInput(req.body);
+        // if(!isValid){
+        //     return res.status(400).json(errors);
+        // }
         //查询数据库是否拥有邮箱
         const user = await AdminModel.findOne({email: req.body.email});
         if (user) {
@@ -26,7 +26,8 @@ class AdminController {
         const newUser: Admin = {
             username: req.body.username,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            key: req.body.key
         };
         // @ts-ignore
         const newAdminModel = new AdminModel(newUser);
@@ -39,21 +40,22 @@ class AdminController {
         });
     }
     public async login (req: Request, res: Response) {
-        const {errors, isValid } = Validator.loginInput(req.body);
-        if(!isValid){
-            return res.status(400).json(errors);
-        }
+        // const {errors, isValid } = Validator.loginInput(req.body);
+        // if(!isValid){
+        //    return res.status(400).json(errors);
+        //}
+        const autoLogin = req.body.autoLogin;
         const user = await AdminModel.findOne({email:req.body.email})
         if(!user) {
-            return res.status(404).json({"message": "用户不存在"});
+            return res.status(400).json({"message": "用户不存在"});
         }
         // 密码匹配
         // @ts-ignore
         const match = await bcrypt.compare(req.body.password, user.password)
         if(match) {
             // @ts-ignore
-            const rule = {id:user.id,email:user.email};
-            const token = await jwt.sign(rule,SecretOrKey,{expiresIn:36000});
+            const rule = {id:user.id,email:user.email,username:user.username,avatar:user.avatar,key:user.key};
+            const token = await jwt.sign(rule,SecretOrKey,{expiresIn: autoLogin ? 604800 : 3600});
             // @ts-ignore
             return res.status(200).json({success:true,token:"Bearer " + token,email:user.email,userId:user._id});
         } else {
@@ -91,6 +93,17 @@ class AdminController {
                     })
                 }
             })
+    }
+
+    public async changePwd (req: Request, res: Response) {
+        const saltRounds = 10;
+        req.body.password = await bcrypt.hash(req.body.password, saltRounds);
+        const user = await AdminModel.findOneAndUpdate({email:req.body.email}, {$set: {password:req.body.password}}, {new: true})
+        if (user) {
+            res.status(200).json({state:"suc",message:'密码修改成功！'})
+        } else {
+            res.status(400).json({state:"failed",message:'密码修改失败！'})
+        }
     }
 }
 
