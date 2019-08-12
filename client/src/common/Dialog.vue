@@ -1,5 +1,5 @@
 <template>
-  <div class="temp">
+  <div class="dialog-wrapper">
     <div class="background-dialog">
       <div class="dialog">
         <div class="league-wrapper">
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div>
-            <button type="button" class="btn btn-block btn-primary btn-confirm">注单已确认</button>
+          <button type="button" class="btn btn-block btn-primary btn-confirm">注单已确认</button>
         </div>
       </div>
     </div>
@@ -46,7 +46,6 @@
 
 <script>
 export default {
-  name: 'Temp',
   data () {
     return {
 
@@ -136,5 +135,3 @@ export default {
     border-top-right-radius: 0;
   }
 </style>
-
-
