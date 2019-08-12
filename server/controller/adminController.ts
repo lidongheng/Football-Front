@@ -27,7 +27,9 @@ class AdminController {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
-            key: req.body.key
+            key: req.body.key,
+            role: req.body.role,
+            des: req.body.des
         };
         // @ts-ignore
         const newAdminModel = new AdminModel(newUser);
@@ -104,6 +106,16 @@ class AdminController {
         } else {
             res.status(400).json({state:"failed",message:'密码修改失败！'})
         }
+    }
+
+    public allUsers (req: Request, res: Response) {
+        AdminModel.find().sort({date: 1})
+            .then(users => {
+                res.status(200).json({state:"suc",message:'密码修改成功！', users: users})
+            })
+            .catch(err => {
+                res.status(400).json({state:"failed",message:'请求失败！'})
+            })
     }
 }
 

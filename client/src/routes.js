@@ -17,6 +17,8 @@ import AddArticle from './components/Article/AddArticle'
 import EditArticle from './components/Article/EditArticle'
 import ArticleDetail from './components/Article/ArticleDetail'
 import About from './components/About/About'
+import Bet from './components/Bet/Bet'
+import AddBet from './components/Bet/AddBet'
 
 import Intention from './components/Report/ReportDetail/Intention'
 import Lineup from './components/Report/ReportDetail/Lineup'
@@ -50,6 +52,8 @@ export const routes = [
   {path: '/report/:pageNow/', component: Report},
   {path: '/report', name: 'reportLink', component: Report},
   {path: '/report/edit/:id/', component: EditReport},
+  {path: '/bet', name: 'bet', component: Bet},
+  {path: '/bet/add', name: 'addBet', component: AddBet},
   {path: '/premierLeague',
     component: PremierLeague,
     redirect: '/premierLeague/index/',

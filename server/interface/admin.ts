@@ -4,4 +4,6 @@ export interface Admin {
     email: string;
     password: string;
     key: string;
+    role?: string;
+    des?: string;
 }

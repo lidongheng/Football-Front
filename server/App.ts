@@ -8,6 +8,7 @@ import {playersRouter} from "./routes/api/players";
 import {teamsRouter} from "./routes/api/teams";
 import {articlesRouter} from "./routes/api/articles";
 import {adminRouter} from "./routes/api/admin";
+import {betRouter} from "./routes/api/bet";
 import mongoose from './db/db';
 import path from "path";
 import passport from 'passport';
@@ -64,6 +65,7 @@ class App {
         this.app.use('/api/teams', teamsRouter);
         this.app.use('/api/articles', articlesRouter);
         this.app.use('/api/admin', adminRouter);
+        this.app.use('/api/bet', betRouter);
         this.app.use('/', (req, res) => {
             res.status(200).send({ message: `node-api is working!`});
         });

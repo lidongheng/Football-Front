@@ -34,6 +34,9 @@
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/report">报告</router-link>
         </li>
+        <li class="nav-item">
+          <router-link tag="a" class="nav-link" to="/bet">模拟投注</router-link>
+        </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item" v-show="!isLogin">

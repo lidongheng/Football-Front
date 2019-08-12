@@ -179,6 +179,43 @@ export class Validator {
 
     }
 
+    public static betInput (data: any) {
+        data.league = !this.isEmpty(data.league) ? data.league : '';
+        data.number = !this.isEmpty(data.number) ? data.number : '';
+        data.host = !this.isEmpty(data.host) ? data.host : '';
+        data.away = !this.isEmpty(data.away) ? data.away : '';
+        data.handicap = !this.isEmpty(data.handicap) ? data.handicap : '';
+        data.profit = !this.isEmpty(data.profit) ? data.profit : '';
+        data.amount = !this.isEmpty(data.amount) ? data.amount : '';
+        let errors = {league:"", number:"", host:"", away:"", handicap:"",
+            profit:"",amount:""};
+        if (validator.isEmpty(data.league)) {
+            errors.league = '联赛名不能为空!'
+        }
+        if (validator.isEmpty(data.number)) {
+            errors.number = '编号不能为空!'
+        }
+        if (validator.isEmpty(data.host)) {
+            errors.host = '主队不能为空!'
+        }
+        if (validator.isEmpty(data.away)) {
+            errors.away = '客队不能为空!'
+        }if (validator.isEmpty(data.handicap)) {
+            errors.handicap = '盘口不能为空!'
+        }
+        if (validator.isEmpty(data.profit)) {
+            errors.profit = '水位不能为空!'
+        }
+        if (validator.isEmpty(data.amount)) {
+            errors.amount = '投注额不能为空!'
+        }
+        return {
+            errors,
+            // @ts-ignore
+            isValid:this.isEmpty(errors)
+        };
+    }
+
     private static isEmpty (value: any) {
         if (typeof value === 'string' && value.trim().length === 0) {
             return true

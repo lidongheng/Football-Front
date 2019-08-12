@@ -38,6 +38,28 @@ class PlayerController {
             })
 
     }
+
+    public async getPlayers (req: Request, res: Response) {
+        const pageNow = req.params.pageNow;
+        const rows = await PlayerModel.find().count();
+        const pageSize = 10;
+        let pages = 0;
+        if (rows % pageSize==0) {
+            pages = rows/pageSize;
+        } else {
+            pages = rows/pageSize+1;
+        }
+        const skipNum = (pageNow-1)*pageSize;
+        try {
+            const players = await PlayerModel.find()
+                .skip(skipNum)
+                .sort({date: -1})
+                .limit(pageSize);
+            res.status(200).json({players, pages, rows});
+        } catch (error) {
+            res.status(400).json({noContentFound: "找不到任何球员信息"});
+        }
+    }
 }
 
 export default PlayerController;

@@ -21,6 +21,16 @@ playersRouter.post('/', (req, res) => {
 // $route GET api/players/:team/
 // @desc 返回true
 // @access public
-playersRouter.get('/:team/', (req, res) => {
-    player.getTeamPlayer(req, res);
+//playersRouter.get('/:team/', (req, res) => {
+//    player.getTeamPlayer(req, res);
+//});
+
+// $route GET api/players/:pageNow/
+// @desc 返回true
+// @access public
+playersRouter.get('/:pageNow/', (req, res) => {
+    player.getPlayers(req, res)
+        .catch(err => {
+            res.status(500).json(err);
+        })
 });

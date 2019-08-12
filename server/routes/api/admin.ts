@@ -38,7 +38,7 @@ adminRouter.post('/login', (req, res) => {
 // @access public
 adminRouter.post('/findPwd', (req, res) => {
     admin.findPwd(req, res);
-})
+});
 
 // $route POST api/admin/changePwd
 // @desc 修改密码
@@ -48,4 +48,11 @@ adminRouter.post('/changePwd', passport.authenticate("jwt",{session:false}), (re
         .catch(err => {
             return res.status(500).json(err);
         })
+});
+
+// $route GET api/admin/
+// @desc 找回密码
+// @access public
+adminRouter.get('/', (req, res) => {
+    admin.allUsers(req, res);
 });
