@@ -40,10 +40,19 @@
       </div>
       <div class="row">
         <div class="col-md-2">
+          <LabelItem textName="投注球队："/>
+        </div>
+        <div class="col-md-10">
+          <InputItem inputType="text" textName="betTeam" placeholder="如：曼联" :error="errors.betTeam" v-model="betTeam"/>
+          <div class="invalid-feedback d-block">{{errors.betTeam}}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
           <LabelItem textName="盘口："/>
         </div>
         <div class="col-md-4">
-          <InputItem inputType="text" textName="handicap" placeholder="如：一球" :error="errors.handicap" v-model="handicap"/>
+          <InputItem inputType="text" textName="handicap" placeholder="如：+0.25" :error="errors.handicap" v-model="handicap"/>
           <div class="invalid-feedback d-block">{{errors.handicap}}</div>
         </div>
         <span class="lead text-center pt-2">水位</span>
@@ -67,12 +76,14 @@
         </div>
       </div>
     </form>
+    <Dialog v-if="isDialogVisible" :bet_order="bet_order" @close="closeDialog"></Dialog>
   </div>
 </template>
 
 <script>
-import InputItem from '../../common/InputItem'
-import LabelItem from '../../common/LabelItem'
+import InputItem from '../common/InputItem'
+import LabelItem from '../common/LabelItem'
+import Dialog from '../common/Dialog'
 export default {
   data () {
     return {
@@ -80,10 +91,13 @@ export default {
       league: '',
       host: '',
       away: '',
+      betTeam: '',
       handicap: '',
       profit: '',
       amount: '',
-      errors: {}
+      errors: {},
+      bet_order: {},
+      isDialogVisible: false
     }
   },
   methods: {
@@ -93,6 +107,7 @@ export default {
         league: this.league,
         host: this.host,
         away: this.away,
+        betTeam: this.betTeam,
         handicap: this.handicap,
         profit: this.profit,
         amount: this.amount,
@@ -100,15 +115,21 @@ export default {
       this.$axios.post('/api/bet/', formData)
         .then(res => {
           console.log(res)
+          this.bet_order = res.data.bet
+          this.isDialogVisible = true
         })
         .catch(err => {
           console.log(err)
         })
+    },
+    closeDialog (val) {
+      this.isDialogVisible = val
     }
   },
   components: {
     InputItem,
-    LabelItem
+    LabelItem,
+    Dialog
   }
 }
 </script>

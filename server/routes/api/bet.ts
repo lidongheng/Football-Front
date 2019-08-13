@@ -18,6 +18,7 @@ betRouter.get('/test', (req, res) => {
 betRouter.post('/', passport.authenticate("jwt",{session:false}), (req, res) => {
     bet.create(req, res)
         .catch(err => {
+            console.log(err);
             return res.status(500).json(err);
         });
 });

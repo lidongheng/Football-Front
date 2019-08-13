@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-import InputItem from '../../common/InputItem'
+import InputItem from '../common/InputItem'
 export default {
   data () {
     return {

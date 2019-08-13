@@ -49,8 +49,8 @@
 
 <script>
 import {formatDatetime} from '../../../utils/formatDate'
-import pagination from '../../common/Pagination'
-import TextAreaItem from '../../common/TextAreaItem'
+import pagination from '../common/Pagination'
+import TextAreaItem from '../common/TextAreaItem'
 export default {
   data () {
     return {

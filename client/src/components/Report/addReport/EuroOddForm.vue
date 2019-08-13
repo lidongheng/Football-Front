@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import InputGroup from '../../../common/InputGroup'
-import LabelItem from '../../../common/LabelItem'
+import InputGroup from '../../common/InputGroup'
+import LabelItem from '../../common/LabelItem'
 export default {
   data () {
     return {

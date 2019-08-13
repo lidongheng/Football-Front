@@ -29,7 +29,7 @@ import RecentMatch from './components/Report/ReportDetail/RecentMatch'
 import Style from './components/Report/ReportDetail/Style'
 
 import PIndex from './components/PremierLeague/PIndex'
-import Team from './common/Team'
+import Team from './components/common/Team'
 
 export const routes = [
   {path: '/', redirect: '/home'},

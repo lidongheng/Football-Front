@@ -172,9 +172,9 @@
 </template>
 
 <script>
-import InputItem from '../../common/InputItem'
-import LabelItem from '../../common/LabelItem'
-import TextAreaItem from '../../common/TextAreaItem'
+import InputItem from '../common/InputItem'
+import LabelItem from '../common/LabelItem'
+import TextAreaItem from '../common/TextAreaItem'
 export default {
   data () {
     return {

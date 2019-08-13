@@ -41,9 +41,9 @@
 </template>
 
 <script>
-import LabelItem from '../../common/LabelItem'
-import InputItem from '../../common/InputItem'
-import TextAreaItem from '../../common/TextAreaItem'
+import LabelItem from '../common/LabelItem'
+import InputItem from '../common/InputItem'
+import TextAreaItem from '../common/TextAreaItem'
 export default {
   data () {
     return {

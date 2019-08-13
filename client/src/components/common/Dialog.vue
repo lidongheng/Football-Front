@@ -5,17 +5,17 @@
         <div class="league-wrapper">
           <div class="line"></div>
           <div class="line"></div>
-          <p class="league">英超</p>
+          <p class="league">{{bet_order.league}}</p>
           <div class="line"></div>
           <div class="line"></div>
         </div>
         <div class="match-wrapper">
-          <span>北京国安</span>
+          <span>{{bet_order.host}}</span>
           <span>vs</span>
-          <span>广州恒大</span>
+          <span>{{bet_order.away}}</span>
         </div>
         <div class="bet-wrapper">
-          <p>广州恒大 -0.5 @ 1.85</p>
+          <p>{{bet_order.betTeam}} {{bet_order.handicap}} @ {{bet_order.profit}}</p>
           <p>让球</p>
         </div>
         <div class="confirm-wrapper">
@@ -25,19 +25,19 @@
         <div class="info-wrapper">
           <div>
             <span>投注金额</span>
-            <span>382.78元</span>
+            <span>{{bet_order.amount + '元'}}</span>
           </div>
           <div>
             <span>可赢金额</span>
-            <span>325.36元</span>
+            <span>{{bet_order.totalProfit + '元'}}</span>
           </div>
           <div>
             <span>注单号</span>
-            <span>20180812102103</span>
+            <span>{{bet_order.serialNumber}}</span>
           </div>
         </div>
         <div>
-          <button type="button" class="btn btn-block btn-primary btn-confirm">注单已确认</button>
+          <button type="button" class="btn btn-block btn-primary btn-confirm" @click="close">注单已确认</button>
         </div>
       </div>
     </div>
@@ -46,13 +46,21 @@
 
 <script>
 export default {
+  props: {
+    bet_order: {
+      type: Object,
+      require: true
+    }
+  },
   data () {
     return {
 
     }
   },
-  components: {
-
+  methods: {
+    close () {
+      this.$emit('close', false);
+    }
   }
 }
 </script>

@@ -31,7 +31,6 @@ export class Validator {
         if(!validator.isLength(data.password,{min:6,max:30})) {
             errors.password = '密码的长度不能小于6位并且不能大于30位!'
         }
-
         if (validator.isEmpty(data.password2)) {
             errors.password2 = '确认密码不能为空!'
         }
@@ -188,7 +187,7 @@ export class Validator {
         data.profit = !this.isEmpty(data.profit) ? data.profit : '';
         data.amount = !this.isEmpty(data.amount) ? data.amount : '';
         let errors = {league:"", number:"", host:"", away:"", handicap:"",
-            profit:"",amount:""};
+            profit:"",amount:"",betTeam:""};
         if (validator.isEmpty(data.league)) {
             errors.league = '联赛名不能为空!'
         }
@@ -200,7 +199,11 @@ export class Validator {
         }
         if (validator.isEmpty(data.away)) {
             errors.away = '客队不能为空!'
-        }if (validator.isEmpty(data.handicap)) {
+        }
+        if (validator.isEmpty(data.betTeam)) {
+            errors.betTeam = '投注球队不能为空!'
+        }
+        if (validator.isEmpty(data.handicap)) {
             errors.handicap = '盘口不能为空!'
         }
         if (validator.isEmpty(data.profit)) {
@@ -208,6 +211,9 @@ export class Validator {
         }
         if (validator.isEmpty(data.amount)) {
             errors.amount = '投注额不能为空!'
+        }
+        if (Number(data.amount) < 10) {
+            errors.amount = '输入金额最小为10元!'
         }
         return {
             errors,

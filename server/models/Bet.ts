@@ -25,6 +25,10 @@ export const BetSchema = new Schema({
         type:String,
         required:true
     },
+    betTeam: {
+        type:String,
+        required:true
+    },
     handicap: {
         type:String,
         required:true
@@ -35,7 +39,11 @@ export const BetSchema = new Schema({
     },
     amount: {
         type:Number,
-        default:10
+        required:true
+    },
+    totalProfit: {
+        type:Number,
+        required:true
     },
     isDelete:{
         type:Number,

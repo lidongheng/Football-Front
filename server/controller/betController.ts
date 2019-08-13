@@ -17,13 +17,17 @@ class BetController {
             league: req.body.league,
             host: req.body.host,
             away: req.body.away,
+            betTeam: req.body.betTeam,
             handicap: req.body.handicap,
             profit: req.body.profit,
-            amount: req.body.amount
+            amount: parseFloat(req.body.amount).toFixed(2),
+            totalProfit: (req.body.amount * req.body.profit).toFixed(2)
         };
         // @ts-ignore
         const newBetModel = new BetModel(newBet);
-        const bet = await newBetModel.save();
+        let bet = await newBetModel.save();
+        bet.amount = parseFloat(bet.amount).toFixed(2);
+        bet.totalProfit = (bet.amount * parseFloat(bet.profit)).toFixed(2);
         process.on('unhandledRejection', error => {
             console.error('unhandledRejection', error);
             process.exit(1) // To exit with a 'failure' code

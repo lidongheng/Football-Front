@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import NewsItem from '../../common/NewsItem'
+import NewsItem from '../common/NewsItem'
 export default {
   components: {
     NewsItem

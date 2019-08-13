@@ -42,10 +42,10 @@
 </template>
 
 <script>
-import NewsItem from '../../common/NewsItem'
-import InputGroup from '../../common/InputGroup'
-import LabelItem from '../../common/LabelItem'
-import Pagination from '../../common/Pagination'
+import NewsItem from '../common/NewsItem'
+import InputGroup from '../common/InputGroup'
+import LabelItem from '../common/LabelItem'
+import Pagination from '../common/Pagination'
 import { formatDatetime } from '../../../utils/formatDate'
 export default {
   data () {

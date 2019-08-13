@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import NewsItem from '../../common/NewsItem'
+import NewsItem from '../common/NewsItem'
 import {formatDate} from "../../../utils/formatDate";
 export default {
   data () {

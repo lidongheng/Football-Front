@@ -4,7 +4,9 @@ export interface Bet {
     league: string;
     host: string;
     away: string;
+    betTeam: string;
     handicap: string;
     profit: string;
     amount: string;
+    totalProfit: string;
 }
