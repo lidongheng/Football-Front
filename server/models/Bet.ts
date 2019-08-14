@@ -45,6 +45,10 @@ export const BetSchema = new Schema({
         type:Number,
         required:true
     },
+    summary: {
+        type:String,
+        default: ""
+    },
     isDelete:{
         type:Number,
         default:0

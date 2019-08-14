@@ -1,45 +1,17 @@
 <template>
-  <div class="temp">
-    <div class="background-dialog">
-      <div class="dialog">
-        <div class="league-wrapper">
-          <div class="line"></div>
-          <div class="line"></div>
-          <p class="league">英超</p>
-          <div class="line"></div>
-          <div class="line"></div>
-        </div>
-        <div class="match-wrapper">
-          <span>北京国安</span>
-          <span>vs</span>
-          <span>广州恒大</span>
-        </div>
-        <div class="bet-wrapper">
-          <p>广州恒大 -0.5 @ 1.85</p>
-          <p>让球</p>
-        </div>
-        <div class="confirm-wrapper">
-          <i class="fa fa-check-circle"></i>
-          <span>注单已确认</span>
-        </div>
-        <div class="info-wrapper">
-          <div>
-            <span>投注金额</span>
-            <span>382.78元</span>
+  <div class="input-dialog-background" @click="close" v-show="show">
+    <div class="dialog" @click.stop>
+      <form>
+        <div class="row mt-5 ml-2">
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="summary" value=""/>
           </div>
-          <div>
-            <span>可赢金额</span>
-            <span>325.36元</span>
-          </div>
-          <div>
-            <span>注单号</span>
-            <span>20180812102103</span>
+          <div class="col-md-3">
+            <button type="submit" class="btn btn-primary">添加</button>
+            <button type="submit" class="btn btn-danger" @click="close">取消</button>
           </div>
         </div>
-        <div>
-            <button type="button" class="btn btn-block btn-primary btn-confirm">注单已确认</button>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -47,9 +19,15 @@
 <script>
 export default {
   name: 'Temp',
+  props: ['show'],
   data () {
     return {
 
+    }
+  },
+  methods: {
+    close () {
+      this.$emit('close')
     }
   },
   components: {
@@ -59,7 +37,7 @@ export default {
 </script>
 
 <style scoped>
-  .background-dialog {
+  .input-dialog-background {
     position: fixed;
     top: 0;
     left: 0;
@@ -71,10 +49,10 @@ export default {
     align-items: center;
   }
   .dialog {
-    width: 300px;
-    height: 427px;
+    width: 700px;
+    height: 150px;
     background: #fdfdfd;
-    border-radius: 5%;
+    border-radius: 10px;
     overflow: hidden;
   }
   .league-wrapper {

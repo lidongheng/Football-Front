@@ -13,6 +13,7 @@ import mongoose from './db/db';
 import path from "path";
 import passport from 'passport';
 import { PassportConfig } from './config/passport';
+import {apiErrorHandler} from "./routes/api/general/errorHandling";
 
 class App {
     public app: express.Application;
@@ -38,6 +39,7 @@ class App {
         this.app.use(bodyParser.urlencoded({extended: false}));
         this.app.use(bodyParser.json());
         this.app.use(passport.initialize());
+        this.app.use(apiErrorHandler);
         const pConfig = new PassportConfig(passport);
         pConfig.init();
         this.app.use("/static", express.static(path.resolve("./","./public","img")));
@@ -65,7 +67,7 @@ class App {
         this.app.use('/api/teams', teamsRouter);
         this.app.use('/api/articles', articlesRouter);
         this.app.use('/api/admin', adminRouter);
-        this.app.use('/api/bet', betRouter);
+        this.app.use('/api/bets', betRouter);
         this.app.use('/', (req, res) => {
             res.status(200).send({ message: `node-api is working!`});
         });

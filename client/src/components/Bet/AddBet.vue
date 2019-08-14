@@ -110,9 +110,9 @@ export default {
         betTeam: this.betTeam,
         handicap: this.handicap,
         profit: this.profit,
-        amount: this.amount,
+        amount: this.amount
       }
-      this.$axios.post('/api/bet/', formData)
+      this.$axios.post('/api/bets/', formData)
         .then(res => {
           console.log(res)
           this.bet_order = res.data.bet

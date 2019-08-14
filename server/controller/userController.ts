@@ -54,7 +54,7 @@ class UserController {
             const rule = {id:user.id,email:user.email};
             const token = await jwt.sign(rule,SecretOrKey,{expiresIn:36000});
             // @ts-ignore
-            return res.status(200).json({success:true,token:"Bearer " + token,email:user.email,userId:user._id});
+            return res.status(200).json({success:true,token:"Bearer " + token,email:user.email,userId:user._id,username:user.username});
         } else {
             return res.status(400).json({"message": "密码错误"});
         }
