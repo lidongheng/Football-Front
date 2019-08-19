@@ -5,6 +5,11 @@ import {Validator} from "../validation/validator";
 
 class BetFormController {
     public async createOrEdit(req: Request, res: Response) {
+        if (req.body.isSingleMatch === true) {
+            req.body.isSingleMatch = '1'
+        } else {
+            req.body.isSingleMatch = '0'
+        }
         const {errors, isValid } = Validator.betFormInput(req.body);
         if(!isValid){
             return res.status(400).json(errors);

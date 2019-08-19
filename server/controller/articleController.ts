@@ -48,7 +48,7 @@ class ArticleController {
     }
 
     public getArticle (req: Request, res: Response) {
-        ArticleModel.findById(req.params.id)
+        ArticleModel.findById(req.params.id).populate('user','username email _id')
             .then(article => {
                 // @ts-ignore
                 article.about.join('');

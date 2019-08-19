@@ -38,24 +38,44 @@ class BetController {
 
     public async getSearchData (req: Request, res: Response) {
         const filters = new BetFilter(req.query);
-        const pageNow = filters.pageNow;
-        const rows = await BetModel.find({ $or: [{host: filters.q}, {away: filters.q}] }).count();
-        const pageSize = 10;
+        const pageNow:number = filters.pageNow;
+        const pageSize:number = Number(filters.pageSize);
+        if (filters.q === '') {
+            var rows = await BetModel.find().count();
+        } else {
+            var rows = await BetModel.find({ $or: [{host: filters.q}, {away: filters.q}] }).count();
+        }
         let pages = 0;
         if (rows % pageSize==0) {
-            pages = rows/pageSize;
+            pages = Math.floor(rows/pageSize);
         } else {
-            pages = rows/pageSize+1;
+            pages = Math.floor(rows/pageSize)+1;
         }
         // @ts-ignore
         const skipNum = (pageNow-1)*pageSize;
-        BetModel.find({ $or: [{host: filters.q}, {away: filters.q}] })
-            .skip(skipNum)
-            .sort({date: -1})
-            .limit(pageSize)
-            .then(bets => {
-                res.status(200).json({bets, pages, rows})})
-            .catch(err => res.status(400).json({noContentFound: "找不到任何订单信息"}))
+        console.log(filters.q)
+        if (filters.q === '') {
+            try {
+                const bets = await BetModel.find()
+                    .skip(skipNum)
+                    .sort({date: -1})
+                    .limit(pageSize);
+                res.status(200).json({bets, pages, rows});
+            } catch (error) {
+                res.status(400).json({noContentFound: "找不到任何订单信息"});
+                //console.log(error);
+                //res.status(400).json({error: error});
+            }
+        } else {
+            BetModel.find({ $or: [{host: filters.q}, {away: filters.q}] })
+                .skip(skipNum)
+                .sort({date: -1})
+                .limit(pageSize)
+                .then(bets => {
+                    res.status(200).json({bets, pages, rows})})
+                .catch(err => res.status(400).json({noContentFound: "找不到任何订单信息"}));
+        }
+
     }
 
     public async getData (req: Request, res: Response) {

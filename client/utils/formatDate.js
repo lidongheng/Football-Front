@@ -68,3 +68,34 @@ export const formatDate = stringTime => {
   }
   return fmt
 }
+
+export const Text2Html = str => {
+  if (str == null) {
+    return "";
+  }else if (str.length() === 0) {
+    return "";
+  }
+  str = str.replaceAll("\n", "<br>");
+  str = str.replaceAll("\r", "<br>");
+  return str;
+}
+
+export const articleDate = stringTime => {
+  let date = new Date(stringTime)
+  let fmt = 'MM-dd'
+  if (/(M+)/.test(fmt)) { // 月
+    let mouth = date.getMonth() + 1
+    if (mouth < 10) {
+      mouth = '0' + mouth
+    }
+    fmt = fmt.replace(RegExp.$1, mouth)
+  }
+  if (/(d+)/.test(fmt)) { // 日
+    let mydate = date.getDate()
+    if (mydate < 10) {
+      mydate = '0' + mydate
+    }
+    fmt = fmt.replace(RegExp.$1, mydate)
+  }
+  return fmt
+}

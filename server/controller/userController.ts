@@ -12,7 +12,7 @@ class UserController {
         console.log(req.body);
         const {errors, isValid } = Validator.registerInput(req.body);
         if(!isValid){
-            return res.status(400).json(errors);
+            return res.status(400).json({errors: errors});
         }
         //查询数据库是否拥有邮箱
         const user = await UserModel.findOne({email: req.body.email});
@@ -40,7 +40,7 @@ class UserController {
     public async login(req: Request, res: Response) {
         const {errors, isValid } = Validator.loginInput(req.body);
         if(!isValid){
-            return res.status(400).json(errors);
+            return res.status(400).json({errors: errors});
         }
         const user = await UserModel.findOne({email:req.body.email})
         if(!user) {

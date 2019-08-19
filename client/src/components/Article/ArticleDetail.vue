@@ -19,8 +19,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
-        <p>{{article.content}}</p>
+      <div class="col-md-12" v-for="(item,index) in article.paragraph" :key="index">
+        <p>{{item}}</p>
       </div>
     </div>
     <div class="row">
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { articleDate } from '../../../utils/formatDate'
 export default {
   data () {
     return {
@@ -55,8 +56,15 @@ export default {
       const id = this.$route.params.id
       this.$axios.get(`/api/articles/${id}/`)
         .then(res => {
-          console.log(res)
-          this.$store.dispatch('setArticle', {article: res.data.article})
+          let article = new Object()
+          article.label = res.data.article.label
+          article.about = res.data.article.about
+          article._id = res.data.article._id
+          article.user = res.data.article.user.username
+          article.title = res.data.article.title
+          article.paragraph = res.data.article.content.replace(/(\r\n)|(\n)/g, '<br>').split('<br>')
+          article.date = articleDate(res.data.article.date)
+          this.$store.dispatch('setArticle', {article: article})
         })
         .catch(err => console.log(err))
     },

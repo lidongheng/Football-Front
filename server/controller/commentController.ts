@@ -46,13 +46,13 @@ class CommentController {
         }
         const skipNum = (pageNow-1)*pageSize;
         try {
-            const contents = await CommentModel.find()
+            const contents = await CommentModel.find().populate('user','username email _id')
                 .skip(skipNum)
                 .sort({date: -1})
                 .limit(pageSize);
             res.status(200).json({contents, pages, rows});
         } catch (error) {
-            res.status(404).json({noContentFound: "找不到任何评论信息"});
+            res.status(400).json({noContentFound: "找不到任何评论信息"});
         }
     }
 
@@ -99,13 +99,13 @@ class CommentController {
             .then(comment => {
                 // @ts-ignore
                 if(comment.user.toString() !== req.user.id){
-                    return res.status(401).json({notAuthorized:"用户非法操作!"})
+                    return res.status(400).json({message:"用户非法操作！"})
                 }
                 // @ts-ignore
                 comment.remove().then(() => res.json({success:true}))
             })
             .catch(err => {
-                res.status(404).json({commentNotFound:"没有该评论信息"})
+                res.status(400).json({message:"该评论信息已被删除！"})
             })
     }
 
