@@ -1,6 +1,27 @@
 import mongoose from '../db/db';
 const Schema = mongoose.Schema;
 
+const recentMatchSchema = new Schema({
+    league:{
+        type:String
+    },
+    match:{
+        type:String
+    },
+    time:{
+        type:String
+    },
+    weekday:{
+        type:String
+    },
+    period:{
+        type:String
+    },
+    place:{
+        type:String
+    }
+})
+
 export const TeamSchema = new Schema({
     league:{
         type:String,
@@ -17,23 +38,7 @@ export const TeamSchema = new Schema({
     style:{
         type:String
     },
-    recentMatch:[
-        {
-            league:{
-                type:String
-            },
-            match:{
-                type:String
-            },
-            time:{
-                type:String
-            },
-            isDelete:{
-                type:Number,
-                default:0
-            }
-        }
-    ]
+    recentMatch:[recentMatchSchema]
 });
 
 export const TeamModel = mongoose.model("Teams", TeamSchema);

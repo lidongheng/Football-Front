@@ -56,7 +56,7 @@ export default {
       const id = this.$route.params.id
       this.$axios.get(`/api/articles/${id}/`)
         .then(res => {
-          let article = new Object()
+          let article = {}
           article.label = res.data.article.label
           article.about = res.data.article.about
           article._id = res.data.article._id

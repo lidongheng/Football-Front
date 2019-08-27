@@ -1,6 +1,6 @@
 <template>
   <div class="ChineseSuperLeague">
-
+    暂无数据
   </div>
 </template>
 

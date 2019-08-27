@@ -14,9 +14,11 @@
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/timeline">时间线</router-link>
         </li>
+        <!--
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/temp">临时</router-link>
         </li>
+        -->
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/premierLeague">英超</router-link>
         </li>

@@ -50,7 +50,6 @@
 import InputItem from '../common/InputItem'
 import Pagination from '../common/Pagination'
 import InputDialog from '../common/InputDialog'
-import {formatDatetime} from "../../../utils/formatDate";
 export default {
   data () {
     return {
@@ -117,10 +116,9 @@ export default {
     },
     searchTeam () {
       this.$axios.get(`/api/bets/?q=${this.team}&pageNow=1`)
-        .then(res=> {
-          console.log(res)
+        .then(res => {
           this.betOrders = res.data.bets
-          this.$router.push({ path: `/bet/??q=${this.team}&pageNow=1`})
+          this.$router.push({path: `/bet/??q=${this.team}&pageNow=1`})
         })
         .catch(err => {
           console.log(err)
@@ -144,7 +142,7 @@ export default {
   components: {
     InputItem,
     'app-pagination': Pagination,
-    InputDialog,
+    InputDialog
   }
 }
 </script>

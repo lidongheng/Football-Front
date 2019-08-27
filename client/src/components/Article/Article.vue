@@ -20,7 +20,7 @@
 
 <script>
 import NewsItem from '../common/NewsItem'
-import {formatDate} from "../../../utils/formatDate";
+import {formatDate} from '../../../utils/formatDate'
 export default {
   data () {
     return {
@@ -36,7 +36,9 @@ export default {
     },
     getData () {
       this.$axios.get('/api/articles/')
-        .then(res => this.article = res.data.article)
+        .then(res => {
+          this.article = res.data.article
+        })
         .catch(err => console.log(err))
     },
     date (d) {

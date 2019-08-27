@@ -55,7 +55,7 @@ export default {
         total: 22,
         pageSize: 10,
         pageNum: 1
-      },
+      }
     }
   },
   created () {
@@ -93,7 +93,7 @@ export default {
             })
             this.match = res.data.match
             this.pagination.total = res.data.rows
-            this.pagination.pageNum = pageNow
+            this.pagination.pageNum = 1
           } else {
             console.log(res)
           }

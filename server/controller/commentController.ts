@@ -46,7 +46,8 @@ class CommentController {
         }
         const skipNum = (pageNow-1)*pageSize;
         try {
-            const contents = await CommentModel.find().populate('user','username email _id')
+            // const contents = await CommentModel.find().populate('user','username email _id')
+            const contents = await CommentModel.find()
                 .skip(skipNum)
                 .sort({date: -1})
                 .limit(pageSize);

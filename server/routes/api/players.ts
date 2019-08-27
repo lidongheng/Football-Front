@@ -18,12 +18,26 @@ playersRouter.post('/', (req, res) => {
     player.add(req, res);
 });
 
-// $route GET api/players/:team/
+// $route DELETE api/players/:id/
 // @desc 返回true
 // @access public
-//playersRouter.get('/:team/', (req, res) => {
-//    player.getTeamPlayer(req, res);
-//});
+playersRouter.delete('/:id/', (req, res) => {
+    player.deletePlayer(req, res);
+});
+
+// $route PUT api/players/:id/
+// @desc 返回true
+// @access public
+playersRouter.put('/:id/', (req, res) => {
+    player.updatePlayer(req, res);
+});
+
+// $route GET api/players/team/:team/
+// @desc 返回true
+// @access public
+playersRouter.get('/team/:team/', (req, res) => {
+    player.getTeamPlayer(req, res);
+});
 
 // $route GET api/players/:pageNow/
 // @desc 返回true
@@ -33,4 +47,21 @@ playersRouter.get('/:pageNow/', (req, res) => {
         .catch(err => {
             res.status(500).json(err);
         })
+});
+
+// $route GET api/players/:id/
+// @desc 返回true
+// @access public
+playersRouter.get('/:id/', (req, res) => {
+    player.getPlayers(req, res)
+        .catch(err => {
+            res.status(500).json(err);
+        })
+});
+
+// $route GET api/players/search/:player/:pageNow/
+// @desc 返回true
+// @access public
+playersRouter.get('/search/:name/:pageNow/', (req, res) => {
+    player.searchPlayer(req, res);
 });

@@ -2,14 +2,16 @@ const state = {
   FW: [],
   MF: [],
   DF: [],
-  GK: []
+  GK: [],
+  style: ''
 }
 
 const getters = {
   FW: state => state.FW,
   MF: state => state.MF,
   DF: state => state.DF,
-  GK: state => state.GK
+  GK: state => state.GK,
+  style: state => state.style
 }
 
 const mutations = {
@@ -18,12 +20,18 @@ const mutations = {
     state.MF = payload.MF
     state.DF = payload.DF
     state.GK = payload.GK
+  },
+  Style (state, payload) {
+    state.style = payload.style
   }
 }
 
 const actions = {
   setPlayers (context, payload) {
     context.commit('Players', payload)
+  },
+  setStyle (context, payload) {
+    context.commit('Style', payload)
   }
 }
 

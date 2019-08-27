@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <h1 class="text-center my-5">球队风格评述</h1>
-        <p class="text-center">美丽足球，前场双子星火力强劲，但是阵容厚度差，应付不了双线作战，而且后场很坑。</p>
+        <p class="text-center">{{style}}</p>
       </div>
     </div>
     <div class="row">
@@ -132,21 +132,35 @@ export default {
     },
     GK () {
       return this.$store.getters.GK
+    },
+    style () {
+      return this.$store.getters.style
     }
   },
   methods: {
+    getPlayers () {
+      return this.$axios.get(`/api/players/team/${this.$route.params.team}/`)
+    },
+    getTeamStyle () {
+      return this.$axios.get(`/api/teams/styles/${this.$route.params.team}/`)
+    },
     getData () {
-      this.team = this.$route.params.team
-      this.$axios.get(`/api/players/${this.team}/`)
+      this.$axios.all([this.getPlayers(), this.getTeamStyle()])
         .then(res => {
-          console.log(res)
-          const FW = res.data.players.filter(player => player.attr.toString() === 'FW')
-          const MF = res.data.players.filter(player => player.attr.toString() === 'MF')
-          const DF = res.data.players.filter(player => player.attr.toString() === 'DF')
-          const GK = res.data.players.filter(player => player.attr.toString() === 'GK')
+          const FW = res[0].data.players.filter(player => player.attr.toString() === 'FW')
+          const MF = res[0].data.players.filter(player => player.attr.toString() === 'MF')
+          const DF = res[0].data.players.filter(player => player.attr.toString() === 'DF')
+          const GK = res[0].data.players.filter(player => player.attr.toString() === 'GK')
           this.$store.dispatch('setPlayers', {FW: FW, MF: MF, DF: DF, GK: GK})
+          this.$store.dispatch('setStyle', {style: res[1].data.team.style})
         })
         .catch(err => console.log(err))
+      // this.$axios.get(`/api/players/team/${this.team}/`)
+      //   .then(res => {
+      //     console.log(res)
+
+      //   })
+      //   .catch(err => console.log(err))
     }
   }
 }

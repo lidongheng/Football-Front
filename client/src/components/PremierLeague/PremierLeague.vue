@@ -46,16 +46,22 @@ export default {
     }
   },
   methods: {
+    getPlayers (team) {
+      return this.$axios.get(`/api/players/team/${team}/`)
+    },
+    getTeamStyle (team) {
+      return this.$axios.get(`/api/teams/styles/${team}/`)
+    },
     toTeam (team) {
       this.$router.push({path: `/premierLeague/${team}/`})
-      this.$axios.get(`/api/players/${team}/`)
+      this.$axios.all([this.getPlayers(team), this.getTeamStyle(team)])
         .then(res => {
-          console.log(res)
-          const FW = res.data.players.filter(player => player.attr.toString() === 'FW')
-          const MF = res.data.players.filter(player => player.attr.toString() === 'MF')
-          const DF = res.data.players.filter(player => player.attr.toString() === 'DF')
-          const GK = res.data.players.filter(player => player.attr.toString() === 'GK')
+          const FW = res[0].data.players.filter(player => player.attr.toString() === 'FW')
+          const MF = res[0].data.players.filter(player => player.attr.toString() === 'MF')
+          const DF = res[0].data.players.filter(player => player.attr.toString() === 'DF')
+          const GK = res[0].data.players.filter(player => player.attr.toString() === 'GK')
           this.$store.dispatch('setPlayers', {FW: FW, MF: MF, DF: DF, GK: GK})
+          this.$store.dispatch('setStyle', {style: res[1].data.team.style})
         })
         .catch(err => console.log(err))
     }

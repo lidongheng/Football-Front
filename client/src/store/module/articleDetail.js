@@ -20,7 +20,7 @@ const actions = {
     context.commit('articleStatus', payload)
   },
   resetArticle (context, payload) {
-    context.commit('removeArticle', payload);
+    context.commit('removeArticle', payload)
   }
 }
 

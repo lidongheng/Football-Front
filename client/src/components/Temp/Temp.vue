@@ -114,5 +114,3 @@ export default {
     border-top-right-radius: 0;
   }
 </style>
-
-
