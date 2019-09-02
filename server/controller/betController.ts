@@ -41,9 +41,9 @@ class BetController {
         const pageNow:number = filters.pageNow;
         const pageSize:number = Number(filters.pageSize);
         if (filters.q === '') {
-            var rows = await BetModel.find().count();
+            var rows = await BetModel.find({user: req.user.id}).count();
         } else {
-            var rows = await BetModel.find({ $or: [{host: filters.q}, {away: filters.q}] }).count();
+            var rows = await BetModel.find({user: req.user.id, $or: [{host: filters.q}, {away: filters.q}] }).count();
         }
         let pages = 0;
         if (rows % pageSize==0) {
@@ -53,10 +53,9 @@ class BetController {
         }
         // @ts-ignore
         const skipNum = (pageNow-1)*pageSize;
-        console.log(filters.q)
         if (filters.q === '') {
             try {
-                const bets = await BetModel.find()
+                const bets = await BetModel.find({user: req.user.id})
                     .skip(skipNum)
                     .sort({date: -1})
                     .limit(pageSize);
@@ -67,7 +66,7 @@ class BetController {
                 //res.status(400).json({error: error});
             }
         } else {
-            BetModel.find({ $or: [{host: filters.q}, {away: filters.q}] })
+            BetModel.find({user: req.user.id, $or: [{host: filters.q}, {away: filters.q}]})
                 .skip(skipNum)
                 .sort({date: -1})
                 .limit(pageSize)
@@ -80,7 +79,7 @@ class BetController {
 
     public async getData (req: Request, res: Response) {
         const pageNow = req.params.pageNow;
-        const rows = await BetModel.find().count();
+        const rows = await BetModel.find({user: req.user.id}).count();
         const pageSize = 10;
         let pages = 0;
         if (rows % pageSize==0) {
@@ -90,7 +89,7 @@ class BetController {
         }
         const skipNum = (pageNow-1)*pageSize;
         try {
-            const bets = await BetModel.find()
+            const bets = await BetModel.find({user: req.user.id})
                 .skip(skipNum)
                 .sort({date: -1})
                 .limit(pageSize);

@@ -28,7 +28,7 @@ betRouter.post('/', passport.authenticate("jwt",{session:false}), (req, res) => 
 // $route GET api/bets
 // @desc 返回的请求的json数据
 // @access public
-betRouter.get('/', checkFilter, (req, res) => {
+betRouter.get('/', checkFilter, passport.authenticate("jwt",{session:false}), (req, res) => {
     bet.getSearchData(req, res)
         .catch(err => {
             console.log(err);
@@ -50,7 +50,7 @@ betRouter.post('/addSummary/', (req, res) => {
 // $route GET api/bets/:pageNow/
 // @desc 返回的请求的json数据
 // @access public
-betRouter.get('/:pageNow/', (req, res) => {
+betRouter.get('/:pageNow/', passport.authenticate("jwt",{session:false}), (req, res) => {
     bet.getData(req, res)
         .catch(err => {
             console.log(err);

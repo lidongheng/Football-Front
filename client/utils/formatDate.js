@@ -1,6 +1,10 @@
 export const formatDatetime = stringTime => {
-  // let date = new Date(Date.parse(new Date(stringTime)));
-  let date = new Date(stringTime);
+  let date
+  if (isNaN(Date.parse(stringTime))) {
+    date = new Date(Date.parse(stringTime.replace(/-/g, '/').replace(/T/, ' ')))
+  } else {
+    date = new Date(Date.parse(stringTime))
+  }
   let fmt = 'yyyy-MM-dd HH:ii:ss';
   if (/(y+)/.test(fmt)) { // 年
     let year = date.getFullYear().toString();
@@ -45,8 +49,12 @@ export const formatDatetime = stringTime => {
 }
 
 export const formatDate = stringTime => {
-  // let date = new Date(Date.parse(new Date(stringTime)));
-  let date = new Date(stringTime);
+  let date
+  if (isNaN(Date.parse(stringTime))) {
+    date = new Date(Date.parse(stringTime.replace(/-/g, '/').replace(/T/, ' ')))
+  } else {
+    date = new Date(Date.parse(stringTime))
+  }
   let fmt = 'yyyy-MM-dd';
   if (/(y+)/.test(fmt)) { // 年
     let year = date.getFullYear().toString();
@@ -69,19 +77,13 @@ export const formatDate = stringTime => {
   return fmt
 }
 
-export const Text2Html = str => {
-  if (str == null) {
-    return "";
-  }else if (str.length() === 0) {
-    return "";
-  }
-  str = str.replaceAll("\n", "<br>");
-  str = str.replaceAll("\r", "<br>");
-  return str;
-}
-
 export const articleDate = stringTime => {
-  let date = new Date(stringTime)
+  let date
+  if (isNaN(Date.parse(stringTime))) {
+    date = new Date(Date.parse(stringTime.replace(/-/g, '/').replace(/T/, ' ')))
+  } else {
+    date = new Date(Date.parse(stringTime))
+  }
   let fmt = 'MM-dd'
   if (/(M+)/.test(fmt)) { // 月
     let mouth = date.getMonth() + 1

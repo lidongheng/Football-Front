@@ -1,8 +1,7 @@
 import axios from 'axios'
-import apiUrl from './api'
 
 axios.defaults.timeout = 10000
-axios.defaults.baseURL = apiUrl
+axios.defaults.baseURL = process.env.API_ROOT
 axios.defaults.transformRequest = function (data) {
   data = JSON.stringify(data)
   return data

@@ -107,5 +107,5 @@ export const routes = [
       {path: '/report/mediaVoice/:id/', component: MediaVoice},
       {path: '/report/other/:id/', component: Other}
     ]},
-  {path: '*', redirect: '/'}
+  {path: '*', redirect: '/premierLeague/index/'}
 ]

@@ -37,7 +37,7 @@ class CommentController {
     public async getData (req: Request, res: Response) {
         const pageNow = req.params.pageNow;
         const rows = await CommentModel.find().count();
-        const pageSize = 5;
+        const pageSize = 10;
         let pages = 0;
         if (rows % pageSize==0) {
             pages = rows/pageSize;

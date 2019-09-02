@@ -73,6 +73,7 @@ class App {
         this.app.use('/api/timeline', timelineRouter);
         this.app.use('/api/forwards', forwardRouter);
         this.app.use('/', (req, res) => {
+            console.log(req.url);
             res.status(200).send({ message: `node-api is working!`});
         });
     }

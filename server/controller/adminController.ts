@@ -37,7 +37,7 @@ class AdminController {
             if (err) {
                 return res.status(400).json({error:err});
             } else {
-                return res.status(200).json({success:true});
+                return res.status(200).json({success:true, message:'注册成功'});
             }
         });
     }
@@ -49,7 +49,7 @@ class AdminController {
         const autoLogin = req.body.autoLogin;
         const user = await AdminModel.findOne({email:req.body.email})
         if(!user) {
-            return res.status(400).json({"message": "用户不存在"});
+            return res.status(400).json({message: "用户不存在"});
         }
         // 密码匹配
         // @ts-ignore
@@ -61,7 +61,7 @@ class AdminController {
             // @ts-ignore
             return res.status(200).json({success:true,token:"Bearer " + token,email:user.email,userId:user._id});
         } else {
-            return res.status(400).json({"message": "密码错误"});
+            return res.status(400).json({message: "密码错误"});
         }
     }
 

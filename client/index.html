@@ -3,7 +3,22 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="Cache-control" content="no-cache">
     <!-- jquery -->
+    <script type="text/javascript">
+      var Param = getUrlParam('isTypeParam');
+      if(!Param){
+        if( /Android|webOS|iPhone|iPod|BlackBerry|iPad/i.test(navigator.userAgent) ) {
+          //if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+          window.location.href = 'http://'+location.hostname+':8082';
+        }
+      }
+      function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+      }
+    </script>
     <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <link rel="stylesheet" href="static/css/reset.css" type="text/css">
     <!--

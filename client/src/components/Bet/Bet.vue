@@ -118,7 +118,7 @@ export default {
       this.$axios.get(`/api/bets/?q=${this.team}&pageNow=1`)
         .then(res => {
           this.betOrders = res.data.bets
-          this.$router.push({path: `/bet/??q=${this.team}&pageNow=1`})
+          this.$router.push({path: `/bet/?q=${this.team}&pageNow=1`})
         })
         .catch(err => {
           console.log(err)
