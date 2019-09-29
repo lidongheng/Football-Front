@@ -21,6 +21,17 @@ class TeamController {
         })
     }
 
+    public get (req: Request, res: Response) {
+        TeamModel.find()
+            .then(teams => {
+                return res.status(200).json({teams: teams});
+            })
+            .catch(err => {
+                console.log(err);
+                return res.status(400).json({message: 'error'});
+            })
+    }
+
     public updateStyle (req: Request, res: Response) {
         const style = req.body.style;
         const club = req.body.club;

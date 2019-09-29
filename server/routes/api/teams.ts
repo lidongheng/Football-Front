@@ -18,6 +18,13 @@ teamsRouter.post('/', (req, res) => {
     team.add(req, res);
 });
 
+// $route GET api/teams/
+// @desc
+// @access public
+teamsRouter.get('/', (req, res) => {
+    team.get(req, res);
+});
+
 // $route PUT api/teams/styles/
 // @desc
 // @access public
