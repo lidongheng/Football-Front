@@ -1,18 +1,13 @@
 <template>
-  <div class="input-dialog-background" @click="close" v-show="show">
-    <div class="dialog" @click.stop>
-      <form>
-        <div class="row mt-5 ml-2">
-          <div class="col-md-9">
-            <input type="text" class="form-control" name="summary" value=""/>
-          </div>
-          <div class="col-md-3">
-            <button type="submit" class="btn btn-primary">添加</button>
-            <button type="submit" class="btn btn-danger" @click="close">取消</button>
-          </div>
+  <div class="search-div">
+    <input type="text" class="search-input" @focus="foo1" :value="value">
+    <ul class="search-ul" v-show="shows">
+      <li v-for="(item, index) in tag" :key="index">
+        <div class="tag-div" @click="handlesss(item)">
+          {{item}}
         </div>
-      </form>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -22,12 +17,25 @@ export default {
   props: ['show'],
   data () {
     return {
-
+      shows: false,
+      tag: ['大数据','前端开发','互联网','后端开发','机器学习','后端开发','码农'],
+      value: ''
     }
   },
   methods: {
     close () {
       this.$emit('close')
+    },
+    foo1 () {
+      this.shows = true
+    },
+    foo2 () {
+      this.shows = false
+    },
+    handlesss (str) {
+      console.log('111')
+      this.value = str
+      this.shows = false
     }
   },
   components: {
@@ -37,80 +45,39 @@ export default {
 </script>
 
 <style scoped>
-  .input-dialog-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: rgba(0,0,0,.5);
+  .search-div {
+    position: relative;
+    width: 400px;
+  }
+  .search-input {
+    width: 100%;
+    height: 34px;
+  }
+  .search-ul {
+    position: absolute;
+    display: flex;
+    top: 34px;
+    flex-flow: row wrap;
+    width: 100%;
+    border: 1px solid #cccccc;
+    box-shadow: 1px 1px 3px #ededed;
+  }
+  .search-ul li {
+    flex:0 0 25%;
+    height: 60px;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .dialog {
-    width: 700px;
-    height: 150px;
-    background: #fdfdfd;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .league-wrapper {
+  .tag-div {
+    width: 70px;
+    height: 30px;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 20px 0 10px 0;
-  }
-  .league-wrapper p {
-    padding: 0;
-    margin: 0 40px;
-    color: #333;
-  }
-  .line {
-    width: 2px;
-    height: 12px;
-    border-radius: 20%;
-    background: lightcoral;
-    transform:rotate(15deg);
-    margin:2px;
-  }
-  .match-wrapper {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 40px;
-  }
-  .bet-wrapper {
-    background: #5FAAEB;
-    height: 100px;
-    margin: 20px 12px;
-    border-radius: 6px;
-  }
-  .bet-wrapper p {
-    text-align: center;
-    color: #fff;
-  }
-  .bet-wrapper p:nth-child(1) {
-    padding: 15px 0 10px 0;
-    margin: 0;
-  }
-  .confirm-wrapper {
-    color: #5FAAEB;
-    text-align: center;
-    margin: 10px 0 30px 0;
-  }
-  .info-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  .info-wrapper div{
-    display: flex;
-    justify-content: space-between;
-    margin:8px 12px;
-  }
-  .btn-confirm {
-    background: #5FBBEB;
-    border-color:#5FBBEB;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border: 1px solid black;
+    cursor: pointer;
   }
 </style>
