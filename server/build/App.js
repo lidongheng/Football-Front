@@ -16,6 +16,7 @@ const admin_1 = require("./routes/api/admin");
 const bet_1 = require("./routes/api/bet");
 const timeline_1 = require("./routes/api/timeline");
 const forward_1 = require("./routes/api/forward");
+const forecast_1 = require("./routes/api/forecast");
 const db_1 = __importDefault(require("./db/db"));
 const path_1 = __importDefault(require("path"));
 const passport_1 = __importDefault(require("passport"));
@@ -74,10 +75,11 @@ class App {
         this.app.use('/api/bets', bet_1.betRouter);
         this.app.use('/api/timeline', timeline_1.timelineRouter);
         this.app.use('/api/forwards', forward_1.forwardRouter);
-        this.app.use('/', (req, res) => {
-            console.log(req.url);
-            res.status(200).send({ message: `node-api is working!` });
-        });
+        this.app.use('/api/forecast', forecast_1.forecastRouter),
+            this.app.use('/', (req, res) => {
+                console.log(req.url);
+                res.status(200).send({ message: `node-api is working!` });
+            });
     }
 }
 exports.default = new App().app;

@@ -11,6 +11,7 @@ import {adminRouter} from "./routes/api/admin";
 import {betRouter} from "./routes/api/bet";
 import {timelineRouter} from "./routes/api/timeline";
 import {forwardRouter} from "./routes/api/forward";
+import {forecastRouter} from "./routes/api/forecast";
 import mongoose from './db/db';
 import path from "path";
 import passport from 'passport';
@@ -72,6 +73,7 @@ class App {
         this.app.use('/api/bets', betRouter);
         this.app.use('/api/timeline', timelineRouter);
         this.app.use('/api/forwards', forwardRouter);
+        this.app.use('/api/forecast', forecastRouter),
         this.app.use('/', (req, res) => {
             console.log(req.url);
             res.status(200).send({ message: `node-api is working!`});
