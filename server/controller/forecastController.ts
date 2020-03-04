@@ -9,6 +9,7 @@ class ForecastController {
             program: req.body.program,
             time: req.body.time,
             percent: req.body.percent,
+            status: req.body.status,
             url: req.body.url
         };
         // @ts-ignore

@@ -3,5 +3,6 @@ export interface Forecast {
     program: string;
     time: string;
     percent: string;
+    status: string;
     url?: string;
 }
