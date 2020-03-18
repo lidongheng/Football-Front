@@ -132,6 +132,30 @@ class PlayerController {
                 res.status(400).json({message: "未查找到该球员！"});
             })
     }
+
+    public async searchNationalPlayer (req: Request, res: Response) {
+        const nation = req.params.nation;
+        console.log('111')
+        const pageNow = req.params.pageNow;
+        const rows = await PlayerModel.find({nation: nation}).count();
+        const pageSize = 10;
+        let pages = 0;
+        if (rows % pageSize==0) {
+            pages = rows/pageSize;
+        } else {
+            pages = rows/pageSize+1;
+        }
+        const skipNum = (pageNow-1)*pageSize;
+        try {
+            const players = await PlayerModel.find({nation: nation})
+                .skip(skipNum)
+                .sort({date: -1})
+                .limit(pageSize);
+            res.status(200).json({players, pages, rows});
+        } catch (error) {
+            res.status(400).json({noContentFound: "找不到任何球员信息"});
+        }
+    }
 }
 
 export default PlayerController;

@@ -65,3 +65,13 @@ playersRouter.get('/:id/', (req, res) => {
 playersRouter.get('/search/:name/:pageNow/', (req, res) => {
     player.searchPlayer(req, res);
 });
+
+// $route GET api/players/searchNational/:player/:pageNow/
+// @desc 返回true
+// @access public
+playersRouter.get('/searchNational/:nation/:pageNow/', (req, res) => {
+    player.searchNationalPlayer(req, res)
+        .catch(err => {
+            res.status(500).json(err);
+        })
+});

@@ -43,6 +43,10 @@ exports.PlayerSchema = new Schema({
         type: String,
         required: true
     },
+    isNationalTeam: {
+        type: String,
+        default: '0'
+    },
     date: {
         type: Date,
         default: Date.now
